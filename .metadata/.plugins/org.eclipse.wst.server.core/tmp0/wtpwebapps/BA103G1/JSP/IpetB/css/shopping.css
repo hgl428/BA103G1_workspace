@@ -1,0 +1,162 @@
+*{
+  /*outline: 1px solid red; */
+}
+.a_product{
+  position: relative; 
+}
+
+#a_side-menu {
+  background-color: #eee;
+  padding-top: 3rem;
+  height: 100%;
+  position: fixed;
+  padding-left: 0px;
+  box-shadow: 1px 1px 10px #ccc;
+  width: 200px;
+}
+}
+
+#a_side-menu .profile-block > * {
+  display: inline-block;
+}
+
+#a_side-menu img {
+  width: 25px;
+  height: 25px;
+  margin-right: 1rem;
+}
+
+#a_side-menu .profile-title {
+  color: #FFF;
+  margin-left: 1rem;
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+#a_side-menu .profile-title small {
+  display: block;
+}
+
+#a_side-menu ul.nav a {
+  color: #000;
+  padding-left: 0px;
+}
+
+#a_side-menu ul.nav a .glyphicon {
+  margin-right: 0.7rem;
+}
+
+#a_side-menu ul.nav a .badge {
+  background-color: #1ca095;
+}
+
+#a_side-menu ul.nav .nav-divider {
+  background-color: #252830;
+}
+
+#a_side-menu ul.nav ul {
+  margin-left: 10%;
+}
+
+#a_side-menu ul.nav ul a {
+  display: block;
+  /*background-color: #5bc0de;*/
+  background-color: #ff9494;
+  padding: 1rem;
+  margin-bottom: 0.3rem;
+  border-radius: 0.25em;
+  color:#fff;
+}
+
+.a_mr5 {
+  margin-right: 5px;
+}
+
+.a_mt30 {
+  margin-top: 30px;
+}
+
+.a_title-area {
+    font-size: 18px;
+    text-align: center;
+}
+
+.a_shoopingImgs img{ 
+  width: 100%;
+}
+
+.a_center {
+  text-align: center;
+}
+
+.a_product {
+  padding-top: 100px;
+}
+
+/* .rightaa {
+  border: 1px solid black;
+} */
+
+.a_mt7r{
+  margin-top: 7rem;
+}
+
+.nav-tabs {
+    margin-top: 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+
+.post-img{
+
+}
+
+.glyphicon-menu-down{
+  font-size: 14px;
+  margin-top: 8px;
+  line-height: 5px;
+}
+
+/* .a_title-area {
+    margin-bottom: 50px;
+    font-size: 18px;
+    text-align: left;
+} */
+
+.a_left{
+  text-align: left;
+  margin-top: 2.5rem;
+}
+
+.a_mt110{
+  margin-top: 110px;
+}
+.tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #5bc0de;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+.nav-tabs>li>a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    color:#94979a;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #f54949;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}

@@ -1,0 +1,192 @@
+package com.petInformation.controller;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.PetBreed.model.PetBreedService;
+import com.PetBreed.model.PetBreedVO;
+import com.PetImage.model.PetImageService;
+import com.PetImage.model.PetImageVO;
+import com.PetSpecies.model.PetSpeciesService;
+import com.PetSpecies.model.PetSpeciesVO;
+import com.petInformation.model.*;
+
+public class PetInformationServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doPost(req, res);
+	}
+
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		req.setCharacterEncoding("UTF-8");
+		String action = req.getParameter("action"); // 知道送出鍵要進入哪個程式區塊
+
+		if ("insert".equals(action)) { // 如果是進入新增程式區塊
+			Map<String ,String> errorMsgs = new LinkedHashMap<String , String>();
+//			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+		
+
+			try {
+				/***************************
+				 * 把要新增的內容都列出來
+				 **********************/
+
+				String petName = req.getParameter("petName").trim();
+//				if (petName == null || (petName.trim()).length() == 0) {
+//					errorMsgs.add("請輸入動物名稱");
+//				}
+				// Send the use back to the form, if there were errors
+//				if (!errorMsgs.isEmpty()) {
+//					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
+//					failureView.forward(req, res);
+//					return;// 程式中斷
+//				}
+				Integer memNo = 123456;
+
+				String petSex = req.getParameter("petSex");
+
+				Integer speciesNo = Integer.parseInt(req.getParameter("speciesNo").trim());
+
+				String petColor = req.getParameter("petColor").trim();
+
+				Integer breedNo = Integer.parseInt(req.getParameter("breedNo"));
+
+				String petAge = req.getParameter("petAge");
+
+				String petSize = req.getParameter("petSize".trim());
+
+				String position = req.getParameter("position");
+
+				String addr = req.getParameter("addr").trim();
+
+				String petPosition = position + addr;
+
+				String petIc = req.getParameter("petIc".trim());
+
+				String TNR = req.getParameter("TNR".trim());
+
+				String petTitle = req.getParameter("petTitle".trim());
+
+				String situation = req.getParameter("situation".trim());
+
+				Double Longitude = Double.parseDouble(req.getParameter("long"));
+
+				Double Latitude = Double.parseDouble(req.getParameter("lat"));
+
+				byte[] petFilm = null;
+
+				Integer memNo2;
+				
+
+				PetInformationVO petInfoVO = new PetInformationVO();
+				petInfoVO.setPetName(petName);
+				petInfoVO.setPetSex(petSex);
+				petInfoVO.setPetColor(petColor);
+				petInfoVO.setPetAge(petAge);
+				petInfoVO.setPetSize(petSize);
+				petInfoVO.setPetPosition(petPosition);
+				petInfoVO.setPetIc(petIc);
+				petInfoVO.setTNR(TNR);
+				petInfoVO.setPetTitle(petTitle);
+				petInfoVO.setSituation(situation);
+				petInfoVO.setPetLongitude(Longitude);
+				petInfoVO.setPetLatitude(Latitude);
+				petInfoVO.setPetFilm(petFilm);
+
+				
+				verification(errorMsgs,petInfoVO);
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("PetInformationVO", petInfoVO);  // Send the use back to the form, if there were errors
+					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
+					failureView.forward(req, res);
+					return;  
+				}
+
+				PetBreedVO breedVO = new PetBreedVO();
+				breedVO.setBreedNo(breedNo);
+
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("PetBreedVO", breedVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
+					failureView.forward(req, res);
+					return;
+				
+				}
+				
+				PetSpeciesVO speciesVO = new PetSpeciesVO();
+				speciesVO.setSpeciesNo(speciesNo);
+
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("PetSpeciesVO", speciesVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				/*************************** 2.開始查詢資料 *****************************************/
+			
+				PetInformationService petInfoSvc = new PetInformationService();
+				PetInformationVO petInfo = petInfoSvc.addPetInfo(memNo,breedNo, petName, petAge, petSize, petColor,
+						petPosition, petIc, TNR, situation, petFilm, petTitle, Longitude, Latitude, petSex);
+				
+				
+				PetSpeciesService petSpeciesSvc = new PetSpeciesService();
+				PetSpeciesVO species =  petSpeciesSvc.addPetSpecies(speciesNo);
+				
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				String url = "/JSP/IpetB/adoption.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交addAdopt.jsp
+				successView.forward(req, res);		
+			}
+			
+			catch (Exception e) {
+				errorMsgs.put("Exception",e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
+				failureView.forward(req, res);
+			}
+
+		}
+		//錯誤驗證區
+		
+		public Map<String, String> verification(Map<String, String> errorMsgs,PetInformationVO petInfoVO) {
+			String passwordText = "";
+			if (petInfoVO.getPetName() == null || petInfoVO.getPetName().trim().length() == 0) {
+				errorMsgs.put("petName", "動物名稱請勿空白");
+			} else if (petInfoVO.getPetColor() == null){
+				errorMsgs.put("petColor", "毛色請勿空白");
+			} else if (petInfoVO.getPetAge() == null ) {
+				errorMsgs.put("againMemPassword", "確認密碼請勿空白");
+			} else if (mbvo.getMemPassword().trim().length() != 0 && mbvo.getAgainPassword().trim().length() != 0
+					&& !mbvo.getMemPassword().equals(mbvo.getAgainPassword())) {
+				errorMsgs.put("password", "密碼前後輸入不一置");
+			} else if (mbvo.getMemName() == null || mbvo.getMemName().trim().length() == 0) {
+				errorMsgs.put("memName", "姓名請勿空白");
+			} else if (mbvo.getMemBirthday() == null) {
+				errorMsgs.put("time", "時間請勿空白");
+			} else if (mbvo.getMemCellPhone() == null || mbvo.getMemCellPhone().trim().length() == 0) {
+				errorMsgs.put("memCellPhone", "手機請勿空白");
+			} else if (mbvo.getMemEmail() == null || mbvo.getMemEmail().trim().length() == 0) {
+				errorMsgs.put("memEmail", "e-mail請勿空白");
+			} else if (mbvo.getMemPost() == null || mbvo.getMemPost().trim().length() == 0) {
+				errorMsgs.put("memPost", "郵遞區號請勿空白");
+			} else if (mbvo.getMemAddress() == null || mbvo.getMemAddress().trim().length() == 0) {
+				errorMsgs.put("memAddress", "地址請勿空白");
+			}
+
+			return errorMsgs;
+		}
+	
+	}
+}

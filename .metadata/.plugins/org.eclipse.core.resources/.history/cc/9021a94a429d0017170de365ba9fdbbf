@@ -1,0 +1,164 @@
+package com.petInformation.controller;
+
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.PetBreed.model.PetBreedService;
+import com.PetBreed.model.PetBreedVO;
+import com.PetImage.model.PetImageService;
+import com.PetImage.model.PetImageVO;
+import com.PetSpecies.model.PetSpeciesService;
+import com.PetSpecies.model.PetSpeciesVO;
+import com.petInformation.model.*;
+
+public class PetInformationServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doPost(req, res);
+	}
+
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		req.setCharacterEncoding("UTF-8");
+		String action = req.getParameter("action"); // 知道送出鍵要進入哪個程式區塊
+
+		if ("insert".equals(action)) { // 如果是進入新增程式區塊
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/***************************
+				 * 把要新增的內容都列出來
+				 **********************/
+
+				String petName = req.getParameter("petName");
+				if (petName == null || (petName.trim()).length() == 0) {
+					errorMsgs.add("請輸入動物名稱");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				Integer memNo = 123456;
+
+				String petSex = req.getParameter("petSex");
+
+				Integer speciesNo = Integer.parseInt(req.getParameter("speciesNo").trim());
+
+				String petColor = req.getParameter("petColor").trim();
+
+				Integer breedNo = Integer.parseInt(req.getParameter("breedNo"));
+
+				String petAge = req.getParameter("petAge");
+
+				String petSize = req.getParameter("petSize".trim());
+
+				String position = req.getParameter("position");
+
+				String addr = req.getParameter("addr").trim();
+
+				String petPosition = position + addr;
+
+				String petIc = req.getParameter("petIc".trim());
+
+				String TNR = req.getParameter("TNR".trim());
+
+				String petTitle = req.getParameter("petTitle".trim());
+
+				String situation = req.getParameter("situation".trim());
+
+				Double Longitude = Double.parseDouble(req.getParameter("long"));
+
+				Double Latitude = Double.parseDouble(req.getParameter("lat"));
+
+				byte[] petFilm = null;
+
+				Integer memNo2;
+				
+
+				PetInformationVO petInfoVO = new PetInformationVO();
+				petInfoVO.setPetName(petName);
+				petInfoVO.setPetSex(petSex);
+				petInfoVO.setPetColor(petColor);
+				petInfoVO.setPetAge(petAge);
+				petInfoVO.setPetSize(petSize);
+				petInfoVO.setPetPosition(petPosition);
+				petInfoVO.setPetIc(petIc);
+				petInfoVO.setTNR(TNR);
+				petInfoVO.setPetTitle(petTitle);
+				petInfoVO.setSituation(situation);
+				petInfoVO.setPetLongitude(Longitude);
+				petInfoVO.setPetLatitude(Latitude);
+				petInfoVO.setPetFilm(petFilm);
+
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("PetInformationVO", petInfoVO);  // Send the use back to the form, if there were errors
+					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
+					failureView.forward(req, res);
+					return;  
+				}
+
+				PetBreedVO breedVO = new PetBreedVO();
+				breedVO.setBreedNo(breedNo);
+
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("PetBreedVO", breedVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				PetSpeciesVO speciesVO = new PetSpeciesVO();
+				speciesVO.setSpeciesNo(speciesNo);
+
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("PetSpeciesVO", speciesVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				/*************************** 2.開始查詢資料 *****************************************/
+
+				PetBreedService breedSvc = new PetBreedService();  //生出一個品種老大
+				PetBreedVO breed = breedSvc.getOneBreed(breedNo);  
+				Integer breedNo = breedSvc.
+				
+				PetInformationService petInfoSvc = new PetInformationService();
+				PetInformationVO petInfo = petInfoSvc.addPetInfo(memNo, breedNo, petName, petAge, petSize, petColor,
+						petPosition, petIc, TNR, situation, memNo2, petFilm, petTitle, Longitude, Latitude, petSex);
+				
+				
+				PetSpeciesService petSpeciesSvc = new PetSpeciesService();
+				PetSpeciesVO species =  petSpeciesSvc.addPetSpecies(speciesNo);
+				
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				String url = "/JSP/IpetB.addAdopt.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交addAdopt.jsp
+				successView.forward(req, res);		
+			}
+			
+			
+
+			catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/JSP/Ipet/addPetInfo.jsp");
+				failureView.forward(req, res);
+			}
+
+		}
+		
+	
+	}
+}

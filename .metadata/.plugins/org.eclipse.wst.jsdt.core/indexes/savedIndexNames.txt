@@ -1,0 +1,12 @@
+INDEX VERSION 1.3+C:\BA103G1-WebApp\BA103G1_workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3356481855.index
+3604698501.index
+1467272407.index
+2896351644.index
+129674786.index
+467350553.index
+2896351644.index
+3566890975.index
+918193464.index
+2702135955.index
+2991257914.index
