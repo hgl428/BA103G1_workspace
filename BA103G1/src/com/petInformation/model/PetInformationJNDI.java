@@ -25,12 +25,12 @@ public class PetInformationJNDI implements PetInformationDao_interface {
 		}
 	}
 
-	private static final String INSERT_SQL = "INSERT INTO petInformation VALUES (petInformation_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_SQL = "Update petInformation set breedNo=?, status=?, petName=?, petAge=?, petSize=?, petColor=?, petPosition=?,"
-			+ "petIc=?, TNR=?, situation=?, petFilm=?, petTitle=?, petSex=? where petNo=?";
+	private static final String INSERT_SQL = "INSERT INTO petInformation (petNo,memNo,breedNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petFilm,petTitle,petLongitude,petLatitude,petSex)VALUES (petInformation_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; // 使用者能輸入的地方，第一次要進資料庫
+	private static final String UPDATE_SQL = "Update petInformation set breedNo = ?, status = ?, petName = ?, petAge = ?, petSize = ?, petColor = ?, petPosition = ?,"
+			+ "petIc = ?, TNR = ?, situation = ?, petFilm = ?, petTitle = ?, petSex = ? where petNo = ?";
 	private static final String DELETE_SQL = "delete from PetInformation where petNo = ?";
-	private static final String GET_ONE_SQL = "select memNo,breedNo,status,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,pexSex from Petinformation where petNo=?";
-	private static final String GETALL_SQL = "select * from petInformation";
+	private static final String GET_ONE_SQL = "select memNo,breedNo,status,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,pexSex from Petinformation where petNo = ?";
+	private static final String GETALL_SQL = "select * from petInformation order by petNo DESC";
 
 
 //	public static void main(String[] args) {

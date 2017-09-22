@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface PetInformationDao_interface {
 
-	public void insert(PetInformationVO informationVO);
+	public Integer insert(PetInformationVO informationVO);
 	
 	public void update(PetInformationVO informationVO);
 	
@@ -13,5 +13,7 @@ public interface PetInformationDao_interface {
 	public PetInformationVO findByPK(Integer petNo);
 	
 	public List<PetInformationVO> getAll();
+	
+	
 	
 }

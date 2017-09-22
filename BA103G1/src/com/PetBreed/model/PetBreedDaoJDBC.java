@@ -22,44 +22,48 @@ public class PetBreedDaoJDBC implements PetBreedDao_interface {
 		// TODO Auto-generated method stub
 		PetBreedDaoJDBC dao = new PetBreedDaoJDBC();
 		
-		//�s�W
-		PetBreedVO pvo = new PetBreedVO();
 		
-		pvo.setBreedName("�w�w�s");
-		pvo.setSpeciesNo(60);
 		
-		dao.insert(pvo);
-	
-		 // �ק�
-		 // PetImageVO pvo2 = new PetImageVO();
-		 //
-		 // pvo2.setPicNote("�W�Ϊ���");
-		 // pvo2.setPicName("�a�ο�");
-		 // pvo2.setPicNo(8);
-		 //
-		 // dao.update(pvo2);
 		
-		 // �R��
-		 // dao.delete(11);
 		
-		 // FindByPK
-		 // PetImageVO PVO3 = dao.findByPK(8);
-		 //
-		 // System.out.println(PVO3.getPetNo() + ",");
-		 // System.out.println(PVO3.getPicture() + ",");
-		 // System.out.println(PVO3.getPicNote() + ",");
-		 // System.out.println(PVO3.getPicName());
+//		PetBreedVO PVO3 = dao.findOneByPK(1);
+//		System.out.println(PVO3.getBreedName() + ",");
+//		System.out.println(PVO3.getSpeciesNo());
+		// �s�W
+		// PetBreedVO pvo = new PetBreedVO();
+		//
+		// pvo.setBreedName("�w�w�s");
+		// pvo.setSpeciesNo(60);
+		//
+		// dao.insert(pvo);
+		//
+		// �ק�
+		// PetImageVO pvo2 = new PetImageVO();
+		//
+		// pvo2.setPicNote("�W�Ϊ���");
+		// pvo2.setPicName("�a�ο�");
+		// pvo2.setPicNo(8);
+		//
+		// dao.update(pvo2);
+
+		// �R��
+		// dao.delete(11);
+
+		// FindByPK
+//		PetBreedVO PVO3 = dao.findOneByPK(8);
+//		
+//		 System.out.println(PVO3.getBreedName());
+//		 System.out.println(PVO3.getSpeciesNo());
 		//
 		// // �d����
-				
-//				List<PetImageVO> list = dao.getAll();
-//				for (PetImageVO pic : list) {
-//					System.out.println(pic.getPicNo());
-//					System.out.println(pic.getPetNo());
-//					System.out.println(pic.getPicture());
-//					System.out.println(pic.getPicNote());
-//					System.out.println(pic.getPicName());
-//				}
+
+		 List<PetBreedVO> list = dao.getAll();
+		 for (PetBreedVO breed : list) {
+		 System.out.println(breed.getBreedNo());
+		 System.out.println(breed.getBreedName());
+		 System.out.println(breed.getSpeciesNo());
+		
+		 }
 	}
 
 	@Override
@@ -193,30 +197,58 @@ public class PetBreedDaoJDBC implements PetBreedDao_interface {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		PetBreedVO breed;
+		PetBreedVO petBreedVO = null;
 
 		try {
+
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
 			ps = con.prepareStatement(GET_ONE_SQL);
+			ps.setInt(1, breedNo);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				breed = new PetBreedVO();
+				petBreedVO = new PetBreedVO();
 
-				breed.setBreedName(rs.getString("breedName"));
-				breed.setSpeciesNo(rs.getInt("speciesNo"));
+				petBreedVO.setBreedName(rs.getString("breedName"));
+				petBreedVO.setSpeciesNo(rs.getInt("speciesNo"));
 			}
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 
-		return null;
+		return petBreedVO;
 	}
 
 	@Override

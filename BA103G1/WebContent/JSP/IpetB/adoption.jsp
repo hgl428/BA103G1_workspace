@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.PetSpecies.model.*"%>
 <%@ page import="com.petInformation.model.*"%>
+<%@ page import="com.PetImage.model.*"%>
 <%@ page import="com.PetBreed.model.*"%>
 <%
 	PetSpeciesService speciesSvc = new PetSpeciesService();
@@ -13,13 +14,17 @@
 
 	PetInformationService petInfoSvc = new PetInformationService();
 	List<PetInformationVO> list = petInfoSvc.getAll();
-
 	pageContext.setAttribute("list", list);
 
-	PetBreedService breedSvc = new PetBreedService();
-	pageContext.setAttribute("breedSvc", breedSvc);
-	List<PetBreedVO> breedList = breedSvc.getAll();
-	pageContext.setAttribute("breedList", breedList);
+ 	PetBreedService breedsvc = new PetBreedService();
+	pageContext.setAttribute("breedSvc", breedsvc);
+ 	List<PetBreedVO> breedlist = breedsvc.getAll();
+	pageContext.setAttribute("breedList", breedlist); 
+
+ 	PetImageService picSvc = new PetImageService();
+ 	List<PetImageVO> imageList = picSvc.getAll();
+ 	pageContext.setAttribute("PetImageVO", imageList);
+ 	
 %>
 
 
@@ -304,17 +309,22 @@
 					<div class="posts">
 						<!--第1則-->
 						<c:forEach var="pet" items="${list}">
+					
 							<div class="box">
 								<div class="row">
-
-
-									<div class="post-img col-xs-12 col-sm-4"></div>
+						
+										
+									<div class="post-img col-xs-12 col-sm-4">
+<%--  										<img src="<%=request.getContextPath()%>/JSP/IpetB/PetImage.do?picNo=${picSvc.getPetPic(pet.petNo}" class="img-responsive">  --%>
+										<img src="<%=request.getContextPath()%>/JSP/IpetB/PetImage.do?petNo=${pet.petNo}&index=1" class="img-responsive">
+									</div>
 
 									<div class="post-text  col-xs-12  col-sm-8">
 
 										<h3>
 											<span>
 												${speciesSvc.findByPk(breedSvc.getOneBreed(pet.breedNo).speciesNo).speciesName}
+
 
 											</span> <a
 												href="<%=request.getContextPath()%>/JSP/IpetB/PetImage.do?picNo=8">${pet.petTitle}</a>
@@ -323,8 +333,9 @@
 
 										<p class="infomation">
 											<span>地點：${pet.petPosition}</span> <span>年齡：${pet.petAge}</span>
-											<span>性別：${pet.petSex}</span><span>性別：${pet.petIc}</span>
+											<span>性別：${pet.petSex}</span><span>晶片：${pet.petIc}</span>
 											
+
 										</p>
 										<p class="description">
 											<span>介紹：</span> ${pet.situation}

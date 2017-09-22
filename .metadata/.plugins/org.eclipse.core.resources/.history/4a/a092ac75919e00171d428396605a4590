@@ -1,0 +1,56 @@
+package com.PetImage.model;
+
+import java.util.List;
+
+public class PetImageService {
+
+	private PetImageDao_interface dao; 
+
+	public PetImageService() {
+		dao = new PetImageDao(); 
+	}
+
+	public PetImageVO addPetImage(Integer picNo, Integer petNo, byte[] petPicture, String picNote, String picName) {
+
+		PetImageVO imageVO = new PetImageVO();
+
+		imageVO.setPicNo(picNo);
+		imageVO.setPetNo(petNo);
+		imageVO.setpetPicture(petPicture);
+		imageVO.setPicNote(picNote);
+		imageVO.setPicName(picName);
+
+		dao.insert(imageVO);
+
+		return imageVO;
+
+	}
+	
+	public PetImageVO updatePetImage(Integer picNo, Integer petNo, byte[] picture, String picNote, String picName){
+		PetImageVO imageVO = new PetImageVO();
+
+		imageVO.setPicNo(picNo);
+		imageVO.setPetNo(petNo);
+		imageVO.setpetPicture(picture);
+		imageVO.setPicNote(picNote);
+		imageVO.setPicName(picName);
+
+		dao.update(imageVO);
+
+		return imageVO;
+	}
+	
+	public void deletePetImage(Integer picNo){
+		dao.delete(picNo);
+	}
+
+	public PetImageVO getOnePetImage(Integer picNo){
+		return dao.findByPK(picNo);
+	}
+	
+	public List<PetImageVO> getAll(){
+		return dao.getAll();
+	}
+	
+	
+}

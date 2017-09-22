@@ -262,7 +262,7 @@
 			<div class="col-xs-6 col-sm-3">
 				<div class="box">
 					<div class="post-img">
-						<img src="images/31.jpg">
+						<img src="<%=request.getContextPath()%>/JSP/IpetB/PetImage.do?picNo=4">
 					</div>
 					<div class="post-text">
 						<h3>

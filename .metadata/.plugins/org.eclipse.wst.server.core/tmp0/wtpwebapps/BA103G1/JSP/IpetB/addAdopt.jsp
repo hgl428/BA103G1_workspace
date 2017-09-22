@@ -4,13 +4,17 @@
 <%@ page import="com.PetBreed.model.*"%>
 <%@ page import="com.PetSpecies.model.*"%>
 <%@ page import="com.petInformation.model.*"%>
+<%@ page import="com.PetImage.model.*"%>
 <%@ page import="java.util.*"%>
 
 <%
-	PetInformationVO petInfoVO = (PetInformationVO) request.getAttribute("PetInformationVO");
-	PetBreedVO breedVO = (PetBreedVO) request.getAttribute("PetBreedVO");
-	PetSpeciesVO speciesVO = (PetSpeciesVO) request.getAttribute("PetSpeciesVO");
+	PetInformationVO petInfoVO = (PetInformationVO) request.getAttribute("PetInformationVO");  //記憶動物table寫錯資料時，其他正確的內容
+	PetBreedVO breedVOe = (PetBreedVO) request.getAttribute("PetBreedVO");  //記憶使用者輸入品種的選項，
+	PetSpeciesVO speciesVO = (PetSpeciesVO) request.getAttribute("PetSpeciesVO");  //記憶使用者輸入種類的選項
+	PetImageVO imageVO =(PetImageVO) request.getAttribute("PetImageVO");  //記憶使用者輸入的照片和標題
 %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,47 +34,14 @@
 <script src="js/main.js"></script>
 <script type="text/javascript"
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVTvj_0kUlIT4NDFTo4AV0ZJbliitGrPQ"></script>
+<script src="js/Address.js"></script>
 
-<script>
-var position;
-$(document).ready(function() {
-	
-                                                    
-$('#postion').change(function(){  //當狀態改變時抓到縣市的值
-	position = this.value;
-	console.log(position);
-});
-
-$("#addr").change(function() {  //當狀態改變時抓到輸入地址的值
-	var add = this.value;
-	console.log(add);
-	position = position + add;
-});
-
-function delayLoop(){
-	addressTolatlan(position);
-	window.setTimeout(delayLoop,1500);
-}
-
-function addressTolatlan(addr){
-	var geocoder = new google.maps.Geocoder();
-	geocoder.geocode({"address":addr},function(results,status){
-		if(status==google.maps.GeocoderStatus.OK){
-			var lat = $("#lat").val();
-			var lng = $("#long").val();
-			$("$lat").val(results[0].geometry.location.lat());
-			$("$long").val(result[0]).geometry.location.lng();
-		}
-	});
-}
-}); 
-</script>
 
 <title>iPet愛動物</title>
 </head>
 
 <body>
-
+${PetBreedVO }
 	<!--第一區：nav區-->
 	<div class="b_nav">
 		<div class="container">
@@ -163,7 +134,7 @@ function addressTolatlan(addr){
 				<h3>
 					<i class="fa fa-pencil-square-o" aria-hidden="true"></i> 填寫送養資料
 				</h3>
-				<form class="col-xs-12 col-sm-12" METHOD="post"
+				<form class="col-xs-12 col-sm-12" METHOD="post"  enctype="multipart/form-data"				
 					ACTION="<%=request.getContextPath()%>/JSP/IpetB/addAdopt.do"
 					name="add">
 					<div class="form-group petName">
@@ -215,7 +186,7 @@ function addressTolatlan(addr){
 
 							<option value="">請選擇</option>
 							<c:forEach var="breedVO" items="${breedSvc.all}">
-								<option value="${breedVO.breedNo}">${breedVO.breedName}</option>
+								<option value="${breedVO.breedNo}" ${(PetBreedVO.breedNo==breedVO.breedNo)? 'selected':'' }>${breedVO.breedName}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -309,10 +280,16 @@ function addressTolatlan(addr){
 					</div>
 
 					<div class="form-group col-sm-6">
-						<label for="petImage"> 動物照片上傳 <span>（可傳十張）</span>
-						</label> <input type="file" class="form-control-file" id="petImage"
-							aria-describedby="fileHelp"> <small id="petImage"
+						<label for="petImage"> 動物照片上傳 
+						</label> <input type="file" class="form-control-file" name="petImage1" value=""
+							aria-describedby="fileHelp"> <small name="igname"
 							class="form-text text-muted"></small>
+							<span class="text-danger">*</span><label for="image">照片名稱</label>
+						<input type="text" class="form-control" id="picName1" name="picName1"
+							placeholder="請填入照片名稱"
+							value="<%=(imageVO == null) ? "" : imageVO.getPicName()%>">
+						<font color="red">${errorMsgs.picName}</font>
+						
 					</div>
 
 					<div class="form-group col-sm-6">

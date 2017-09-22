@@ -28,28 +28,28 @@ public class PetInformationDaoJDBC implements PetInformationDao_interface {
 		PetInformationDaoJDBC dao = new PetInformationDaoJDBC();
 
 		// 新增
-		PetInformationVO PVO1 = new PetInformationVO();
-		
-		 PVO1.setMemNo(222);
-		 PVO1.setBreedNo(10);
-		
-		 PVO1.setPetName("好帥");
-		 PVO1.setPetAge("幼");
-		 PVO1.setPetSize("中");
-		 PVO1.setPetColor("黑");
-		 PVO1.setPetPosition("桃園市中壢區中央路300號");
-		 PVO1.setPetIc("有");
-		 PVO1.setTNR("無");
-		 PVO1.setSituation("快樂的不得了");
-		
-		
-		 PVO1.setPetFilm(null);
-		 PVO1.setPetTitle("史上無敵可愛");
-		 PVO1.setPetLongitude(123.0111100);
-		 PVO1.setPetLatitude(111.0000000);
-		 PVO1.setPetSex("公");
-		
-		 dao.insert(PVO1);
+//		PetInformationVO PVO1 = new PetInformationVO();
+//		
+//		 PVO1.setMemNo(222);
+//		 PVO1.setBreedNo(10);
+//		
+//		 PVO1.setPetName("好帥");
+//		 PVO1.setPetAge("幼");
+//		 PVO1.setPetSize("中");
+//		 PVO1.setPetColor("黑");
+//		 PVO1.setPetPosition("桃園市中壢區中央路300號");
+//		 PVO1.setPetIc("有");
+//		 PVO1.setTNR("無");
+//		 PVO1.setSituation("快樂的不得了");
+//		
+//		
+//		 PVO1.setPetFilm(null);
+//		 PVO1.setPetTitle("史上無敵可愛");
+//		 PVO1.setPetLongitude(123.0111100);
+//		 PVO1.setPetLatitude(111.0000000);
+//		 PVO1.setPetSex("公");
+//		
+//		 dao.insert(PVO1);
 
 
 		// 修改
@@ -98,41 +98,42 @@ public class PetInformationDaoJDBC implements PetInformationDao_interface {
 
 		// // 查詢全部
 		//
-		// List<PetInformationVO> list = dao.getAll();
-		// for (PetInformationVO get : list) {
-		// System.out.println(get.getPetNo() + ",");
-		// System.out.println(get.getMemNo() + ",");
-		// System.out.println(get.getBreedNo() + ",");
-		// System.out.println(get.getStatus() + ",");
-		// System.out.println(get.getPetName() + ",");
-		// System.out.println(get.getPetAge() + ",");
-		// System.out.println(get.getPetSize() + ",");
-		// System.out.println(get.getPetColor() + ",");
-		// System.out.println(get.getPetPosition() + ",");
-		// System.out.println(get.getPetIc() + ",");
-		// System.out.println(get.getTNR() + ",");
-		// System.out.println(get.getSituation() + ",");
-		// System.out.println(get.getPetDate() + ",");
-		// System.out.println(get.getMemNo2() + ",");
-		// System.out.println(get.getPetFilm() + ",");
-		// System.out.println(get.getPetTitle() + ",");
-		// System.out.println(get.getPetSex() + ",");
-		// System.out.println();
-		//
-		// }
+		 List<PetInformationVO> list = dao.getAll();
+		 for (PetInformationVO get : list) {
+		 System.out.println(get.getPetNo() + ",");
+		 System.out.println(get.getMemNo() + ",");
+		 System.out.println(get.getBreedNo() + ",");
+		 System.out.println(get.getStatus() + ",");
+		 System.out.println(get.getPetName() + ",");
+		 System.out.println(get.getPetAge() + ",");
+		 System.out.println(get.getPetSize() + ",");
+		 System.out.println(get.getPetColor() + ",");
+		 System.out.println(get.getPetPosition() + ",");
+		 System.out.println(get.getPetIc() + ",");
+		 System.out.println(get.getTNR() + ",");
+		 System.out.println(get.getSituation() + ",");
+		 System.out.println(get.getPetDate() + ",");
+		 System.out.println(get.getMemNo2() + ",");
+		 System.out.println(get.getPetFilm() + ",");
+		 System.out.println(get.getPetTitle() + ",");
+		 System.out.println(get.getPetSex() + ",");
+		 System.out.println();
+		
+		 }
 
 	}
 
 	@Override
-	public void insert(PetInformationVO informationVO) {
+	public Integer insert(PetInformationVO informationVO) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement ps = null;
-
+		Integer petNo = null;
+		String[] cols =  {"petNO"} ; 
 		try {
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			ps = con.prepareStatement(INSERT_SQL);
+			ps = con.prepareStatement(INSERT_SQL,cols);
 
 			ps.setInt(1, informationVO.getMemNo());
 			ps.setInt(2, informationVO.getBreedNo());
@@ -154,13 +155,29 @@ public class PetInformationDaoJDBC implements PetInformationDao_interface {
 			ps.setString(15, informationVO.getPetSex());
 			ps.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//getGeneratedKeys();取得主鍵值
+			ResultSet rs = ps.getGeneratedKeys();  //找到主鍵值 
+			ResultSetMetaData rsmd = rs.getMetaData();  //
+			int columnCount = rsmd.getColumnCount() ;
+			if(rs.next()){    //為什麼要跑迴圈，就是如果新增很多筆的時候，就需要去找到，但現在只有一筆，所以一定就只會有那筆
+				do{
+					for(int i = 1; i<columnCount; i++){
+						petNo = rs.getInt(i);
+						System.out.println("自增主鍵值="+petNo+"剛新增成功的動物編號");
+					
+				    }
+				}while(rs.next());
+			}
+			rs.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
+			
 			if (ps != null) {
 				try {
 					ps.close();
@@ -178,7 +195,7 @@ public class PetInformationDaoJDBC implements PetInformationDao_interface {
 				e.printStackTrace();
 			}
 		}
-
+		return petNo;		
 	}
 
 	@Override

@@ -2,18 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Date" key="selection"/>
+		<item value="PetBreedVO" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="Date"/>
-			<item value="date"/>
-			<item value="parse"/>
-			<item value="petName"/>
-			<item value="Ipet"/>
-			<item value="selectServlet"/>
+			<item value="PetBreedVO"/>
+			<item value="breedVO"/>
+			<item value="speciesVO"/>
+			<item value="PetSpeciesVO"/>
+			<item value="errorMsgs"/>
+			<item value="printlog"/>
+			<item value="getPetPic"/>
+			<item value="picSvc"/>
 		</list>
 		<list key="replacehistory">
 		</list>

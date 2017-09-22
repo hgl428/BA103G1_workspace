@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;jdbc.util.CompositeQuery&apos; to &apos;BA103G1/src&apos;&#x0D;&#x0A;- Original project: &apos;IBM_emp_0403MVC_Associations3_CompositeQuery2&apos;&#x0D;&#x0A;- Destination element: &apos;BA103G1/src&apos;&#x0D;&#x0A;- Original element: &apos;IBM_emp_0403MVC_Associations3_CompositeQuery2/src/jdbc.util.CompositeQuery&apos;" description="Copy package" destination="=BA103G1/src" element1="/src&lt;jdbc.util.CompositeQuery" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1506078619824" version="1.0"/>
+</session>

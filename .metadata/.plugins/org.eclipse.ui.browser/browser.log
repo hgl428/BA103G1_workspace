@@ -1,3 +1,7 @@
 
 9月 19, 2017 21:36:13.43 NEW SESSION
 9月 19, 2017 21:36:13.43 [6776:6444:0919/213613.434:ERROR:backend_impl.cc(1021)] Critical error found -8
+
+9月 21, 2017 11:20:38.25 NEW SESSION
+9月 21, 2017 11:20:38.25 [3120:1148:0921/112038.250:ERROR:browser_gpu_channel_host_factory.cc(103)] Failed to launch GPU process.
+9月 21, 2017 22:12:52.97 [9028:5972:0921/221252.969:ERROR:backend_impl.cc(1021)] Critical error found -8

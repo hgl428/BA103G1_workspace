@@ -27,7 +27,7 @@ public class PetSpeciesDao implements PetSpeciesDao_interface {
 	private static final String GETALL_SQL = "select * from petSpecies";
 	private static final String GET_ONE_SQL = "select * from petSpecies where speciesNo = ?";
 	private static final String DELETE_SQL = "delete from petSpecies where speciesNo = ?";
-	private static final String UPDATE_SQL = "update petSpecies set speciesName=? WHERE speciesNo=?";
+	private static final String UPDATE_SQL = "update petSpecies set speciesName = ? WHERE speciesNo = ?";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

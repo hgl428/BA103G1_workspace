@@ -1,6 +1,7 @@
 package com.PetImage.model;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,6 @@ import javax.sql.DataSource;
 
 public class PetImageDao implements PetImageDao_interface {
 
-	// �@�����ε{����,�w��@�Ӹ�Ʈw ,�@�Τ@��DataSource�Y�i
 	private static DataSource ds = null;
 	static {
 		try {
@@ -25,27 +25,27 @@ public class PetImageDao implements PetImageDao_interface {
 		}
 	}
 
-	private static final String INSERT_SQL = "insert into PetImage(picNo, petNo,petPicture,picNote, picName) values (picNo_seq.NEXTVAL,?,?,?,?)";
-	private static final String UPDATE_SQL = "update PetImage set picNote=?,picName=? where picNo=?";
+	private static final String INSERT_SQL = "insert into PetImage (picNo, petNo, petPicture, picName) values (picNo_seq.NEXTVAL,?,?,?)";
+	private static final String UPDATE_SQL = "update PetImage set petPicture = ?, picName = ? where picNo = ?";
 	private static final String DELETE_SQL = "delete from PetImage where picNo = ?";
-	private static final String GET_ONE_SQL = "select picNo,petNo,petPicture,picNote,picName from PetImage where picNo =?";
-	private static final String GETALL_SQL = "select * from PetImage";
+	private static final String GET_ONE_SQL = "select petPicture from PetImage where picNo = ?";
+	private static final String GETALL_SQL = "select petPicture from PetImage";
+	private static final String GETPETPIC_SQL = "select petPicture from PetImage where petNo = ? ";
 
-	
-//	public static void main(String[] args) {
-//
-//		PetImageDao dao = new PetImageDao();
-//
-//		// �s�W
-//		 PetImageVO pvo = new PetImageVO();
-//		
-//		 pvo.setPetNo(3);
-//		 pvo.setpetPicture(null);
-//		 pvo.setPicNote("好可愛");
-//		 pvo.setPicName("最帥氣");
-//		
-//		 dao.insert(pvo);
-//	}
+	// public static void main(String[] args) {
+	//
+	// PetImageDao dao = new PetImageDao();
+	//
+	// // �s�W
+	// PetImageVO pvo = new PetImageVO();
+	//
+	// pvo.setPetNo(3);
+	// pvo.setpetPicture(null);
+	// pvo.setPicNote("好可愛");
+	// pvo.setPicName("最帥氣");
+	//
+	// dao.insert(pvo);
+	// }
 	@Override
 	public void insert(PetImageVO imageVO) {
 		// TODO Auto-generated method stub
@@ -59,8 +59,7 @@ public class PetImageDao implements PetImageDao_interface {
 
 			ps.setInt(1, imageVO.getPetNo());
 			ps.setBytes(2, imageVO.getpetPicture());
-			ps.setString(3, imageVO.getPicNote());
-			ps.setString(4, imageVO.getPicName());
+			ps.setString(3, imageVO.getPicName());
 
 			ps.executeUpdate();
 
@@ -97,7 +96,7 @@ public class PetImageDao implements PetImageDao_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_SQL);
 
-			pstmt.setString(1, imageVO.getPicNote());
+			pstmt.setBytes(1, imageVO.getpetPicture());
 			pstmt.setString(2, imageVO.getPicName());
 			pstmt.setInt(3, imageVO.getPicNo());
 
@@ -180,11 +179,9 @@ public class PetImageDao implements PetImageDao_interface {
 			while (rs.next()) {
 
 				imageVO = new PetImageVO();
-				imageVO.setPicNo(rs.getInt("picNo"));
-				imageVO.setPetNo(rs.getInt("petNo"));
+
 				imageVO.setpetPicture(rs.getBytes("petPicture"));
-				imageVO.setPicNote(rs.getString("picNote"));
-				imageVO.setPicName(rs.getString("picName"));
+
 			}
 
 		} catch (SQLException e) {
@@ -238,13 +235,67 @@ public class PetImageDao implements PetImageDao_interface {
 			while (rs.next()) {
 				imageVO = new PetImageVO();
 
-				imageVO.setPicNo(rs.getInt("picNo"));
-				imageVO.setPetNo(rs.getInt("petNo"));
 				imageVO.setpetPicture(rs.getBytes("petPicture"));
-				imageVO.setPicNote(rs.getString("picNote"));
-				imageVO.setPicName(rs.getString("picName"));
 
 				list.add(imageVO);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<PetImageVO> getPetPic(Integer petNo) {
+		// TODO Auto-generated method stub
+		List<PetImageVO> list = new ArrayList<PetImageVO>();
+
+		PetImageVO imageVO = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			ps = con.prepareStatement(GETPETPIC_SQL);
+			ps.setInt(1, petNo);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				imageVO = new PetImageVO();
+
+				imageVO.setpetPicture(rs.getBytes("petPicture"));
+
 			}
 
 		} catch (SQLException e) {

@@ -18,6 +18,7 @@
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
+	
 	<servlet>
 		<servlet-name>passImageServlet</servlet-name>
 		<servlet-class>com.PetImage.controller.PassImageServlet</servlet-class>
@@ -27,14 +28,7 @@
 		<url-pattern>/JSP/IpetB/PetImage.do</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>IndexImageServlet</servlet-name>
-		<servlet-class>com.PetImage.controller.PassImageServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>IndexImageServlet</servlet-name>
-		<url-pattern>/JSP/IpetB/Index2.jsp</url-pattern>
-	</servlet-mapping>
+	
 
 	<servlet>
 		<servlet-name>PetInformationServlet</servlet-name>

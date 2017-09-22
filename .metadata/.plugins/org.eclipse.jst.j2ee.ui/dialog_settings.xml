@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="false" key="J2EE_EXPORT_OVERWRITE"/>
+	<item value="true" key="J2EE_EXPORT_OVERWRITE"/>
 	<item value="true" key="J2EE_EXPORT_SOURCE"/>
 	<list key="J2EE_IMPORT_null">
 		<item value="C:\Users\Java\Desktop\servlet\SL314_Servlet課程分享\SL314_課程中分享\23_●Struts(webapps)_B\03_IBM_emp_MVC(未借助任何FrameWork的版本)\IBM_emp_0403MVC_Associations3_CompositeQuery2.war"/>

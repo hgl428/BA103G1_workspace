@@ -26,22 +26,22 @@ public class PetBreedDao implements PetBreedDao_interface {
 	}
 
 	private static final String INSERT_SQL = "insert into PetBreed values (petBreed_seq.NEXTVAL,?,?)";
-	private static final String UPDATE_SQL = "update PetBreed set BreedName=? where breedNo = ?";
+	private static final String UPDATE_SQL = "update PetBreed set BreedName = ? where breedNo = ?";
 	private static final String DELETE_SQL = "delete from PetBreed where breedNo = ?";
 	private static final String GET_ONE_SQL = "select * from PetBreed where breedNo = ?";
-	private static final String GETALL_SQL = "select * from PetBreed";
+	private static final String GETALL_SQL =  "select * from PetBreed";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		PetBreedDaoJDBC dao = new PetBreedDaoJDBC();
+		PetBreedDao dao = new PetBreedDao();
 
 		// �s�W
-		PetBreedVO pvo = new PetBreedVO();
-
-		pvo.setBreedName("�w�w�s");
-		pvo.setSpeciesNo(60);
-
-		dao.insert(pvo);
+//		PetBreedVO pvo = new PetBreedVO();
+//
+//		pvo.setBreedName("麻雀");
+//		pvo.setSpeciesNo(40);
+//
+//		dao.insert(pvo);
 
 		// �ק�
 		// PetImageVO pvo2 = new PetImageVO();
@@ -56,12 +56,12 @@ public class PetBreedDao implements PetBreedDao_interface {
 		// dao.delete(11);
 
 		// FindByPK
-		// PetImageVO PVO3 = dao.findByPK(8);
-		//
-		// System.out.println(PVO3.getPetNo() + ",");
-		// System.out.println(PVO3.getPicture() + ",");
-		// System.out.println(PVO3.getPicNote() + ",");
-		// System.out.println(PVO3.getPicName());
+//		PetBreedVO PVO3 = dao.findOneByPK(10);
+//		
+//		
+//		 System.out.println(PVO3.getBreedName() + ",");
+//		 System.out.println(PVO3.getSpeciesNo());
+	
 		//
 		// // �d����
 
@@ -256,7 +256,7 @@ public class PetBreedDao implements PetBreedDao_interface {
 		ResultSet rs = null;
 
 		try {
-
+			
 			con = ds.getConnection();
 			ps = con.prepareStatement(GETALL_SQL);
 			rs = ps.executeQuery();

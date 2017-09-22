@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface PetImageDao_interface {
 
-	public void insert(PetImageVO imageVO);  //·s¼W
-	public void update(PetImageVO imageVO);  //­×§ï
-	public void delete(Integer picNo);  //§R°£
-	public PetImageVO findByPK(Integer picNo);  //¥Î pk¬d¤@­Ó°Êª«
-	public List<PetImageVO> getAll();    //¬d¥þ³¡
-	
+	public void insert(PetImageVO imageVO);  
+	public void update(PetImageVO imageVO); 
+	public void delete(Integer picNo);  
+	public PetImageVO findByPK(Integer picNo);  
+	public List<PetImageVO> getAll();    
+	public List<PetImageVO> getPetPic(Integer petNo);  //ç”¨ä¸€éš»å‹•ç‰©åŽ»æŸ¥å¤šå¼µåœ–
 		
 }
