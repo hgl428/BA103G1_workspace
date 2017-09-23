@@ -1,0 +1,6 @@
+package com.PetView.model;
+
+public interface PetViewDao_interface {
+
+	
+}
