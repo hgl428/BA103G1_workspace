@@ -7,4 +7,8 @@
 <fullyQualifiedTypeName name="java.sql.ResultSetMetaData"/>
 <fullyQualifiedTypeName name="javax.servlet.annotation.MultipartConfig"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.petInformation.model.PetInformationVO"/>
+<fullyQualifiedTypeName name="com.PetView.model.PetViewService"/>
+<fullyQualifiedTypeName name="com.PetView.model.PetViewVO"/>
+<fullyQualifiedTypeName name="org.apache.jasper.tagplugins.jstl.core.Out"/>
 </qualifiedTypeNameHistroy>

@@ -20,46 +20,38 @@ public class PetViewDaoJDBC implements PetViewDao_interface {
 	public static void main(String[] args) {
 		PetViewDaoJDBC dao = new PetViewDaoJDBC();
 		// TODO Auto-generated method stub
-//		List<PetViewVO> PVO3 = dao.getAll();
+		 List<PetViewVO> PVO3 = dao.getAll();
 
+		 for (PetViewVO list : PVO3) {
+		
+		 System.out.println(list.getSpeciesName() + ",");
+		 System.out.println(list.getBreedName() + ",");
+		 System.out.println(list.getPetNo() + ",");
+		 System.out.println(list.getPetName() + ",");
+		 System.out.println(list.getPetAge() + ",");
+		 System.out.println(list.getPetSize() + ",");
+		 System.out.println(list.getPetColor() + ",");
+		 System.out.println(list.getPetPosition() + ",");
+		 System.out.println(list.getPetIc() + ",");
+		 System.out.println(list.getTNR() + ",");
+		 System.out.println(list.getSituation() + ",");
+		 System.out.println(list.getPetDate() + ",");
+		 System.out.println(list.getPetFilm() + ",");
+		 System.out.println(list.getPetTitle() + ",");
+		 System.out.println(list.getPetSex() + ",");
+		 }
+
+//		List<PetViewVO> PVO3 = dao.getSome();
 //		for (PetViewVO list : PVO3) {
 //
 //			System.out.println(list.getSpeciesName() + ",");
 //			System.out.println(list.getBreedName() + ",");
-//			System.out.println(list.getPetNo() + ",");
 //			System.out.println(list.getPetName() + ",");
-//			System.out.println(list.getPetAge() + ",");
-//			System.out.println(list.getPetSize() + ",");
-//			System.out.println(list.getPetColor() + ",");
 //			System.out.println(list.getPetPosition() + ",");
-//			System.out.println(list.getPetIc() + ",");
-//			System.out.println(list.getTNR() + ",");
 //			System.out.println(list.getSituation() + ",");
-//			System.out.println(list.getPetDate() + ",");
-//			System.out.println(list.getPetFilm() + ",");
 //			System.out.println(list.getPetTitle() + ",");
 //			System.out.println(list.getPetSex() + ",");
 //		}
-
-		List<PetViewVO> PVO3 = dao.getSome();
-		for (PetViewVO list : PVO3) {
-
-			System.out.println(list.getSpeciesName() + ",");
-			System.out.println(list.getBreedName() + ",");
-			System.out.println(list.getPetNo() + ",");
-			System.out.println(list.getPetName() + ",");
-			System.out.println(list.getPetAge() + ",");
-			System.out.println(list.getPetSize() + ",");
-			System.out.println(list.getPetColor() + ",");
-			System.out.println(list.getPetPosition() + ",");
-			System.out.println(list.getPetIc() + ",");
-			System.out.println(list.getTNR() + ",");
-			System.out.println(list.getSituation() + ",");
-			System.out.println(list.getPetDate() + ",");
-			System.out.println(list.getPetFilm() + ",");
-			System.out.println(list.getPetTitle() + ",");
-			System.out.println(list.getPetSex() + ",");
-		}
 	}
 
 	@Override

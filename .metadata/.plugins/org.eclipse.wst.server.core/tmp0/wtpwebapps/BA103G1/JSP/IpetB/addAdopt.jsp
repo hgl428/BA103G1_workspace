@@ -26,15 +26,18 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/JSP/IpetB/css/main.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/JSP/IpetB/css/nav.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="js/main.js"></script>
+<!-- <script src="js/main.js"></script> -->
 <script type="text/javascript"
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVTvj_0kUlIT4NDFTo4AV0ZJbliitGrPQ"></script>
 <script src="js/Address.js"></script>
+<script src="<%=request.getContextPath()%>/JSP/IpetB/js/main.js"></script>
 
 
 <title>iPet愛動物</title>
@@ -148,16 +151,14 @@ ${PetBreedVO }
 							name="petSex" value="公"checked> 公 <input type="radio"
 							name="petSex" value="母" > 母
 					</div>
-
+       <jsp:useBean id="speciesSvc" scope="page" class="com.PetSpecies.model.PetSpeciesService" />
 					<div class="form-group species">
 						<span class="text-danger">*</span><label for="species">動物類型</label>
 						<select class="form-control" name="speciesNo">
 							<option value="">請選擇</option>
-							<option value="10">狗</option>
-							<option value="20">貓</option>
-							<option value="30">水族</option>
-							<option value="40">鳥</option>
-							<option value="50">其他</option>
+							<c:forEach var="speciesVO" items="${speciesSvc.all}">
+								<option value="${speciesVO.speciesNo}" ${(PetSpeciesVO.speciesNo==speciesVO.speciesNo)? 'selected':'' }>${speciesVO.speciesName}</option>
+							</c:forEach>
 						</select>
 
 					</div>
@@ -239,7 +240,7 @@ ${PetBreedVO }
 						<span class="text-danger">*</span><label for="keyAddr">送養地址</label>
 						<input type="text" class="form-control" id="addr" name="addr"
 							placeholder="請填入寵物所在地址"
-							value="<%=(petInfoVO == null) ? "" : petInfoVO.getPetPosition()%>">
+							value="${param.addr}">
 						<font color="red">${errorMsgs.addr}</font>
 					</div>
 

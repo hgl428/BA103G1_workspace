@@ -1,0 +1,24 @@
+package com.PetView.model;
+
+import java.util.List;
+
+
+public class PetViewService {
+	
+	private PetViewDao_interface dao;
+	
+	public PetViewService() {
+		dao = new PetViewDao();
+//		dao = new PetInformationDaoJDBC();
+	}
+	
+	public List<PetViewVO> getSome() {
+		return dao.getSome();
+
+	}
+	
+	public List<PetViewVO> getAll() {
+		return dao.getAll();
+
+	}
+}

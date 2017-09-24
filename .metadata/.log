@@ -7269,3 +7269,187 @@ org.eclipse.recommenders.utils.Logs$LogTraceException
 	at org.eclipse.recommenders.internal.calls.rcp.RcpCallModelProvider.acquireModel(RcpCallModelProvider.java:1)
 	at org.eclipse.recommenders.internal.models.rcp.PrefetchModelArchiveJob.run(PrefetchModelArchiveJob.java:43)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SESSION 2017-09-24 11:34:22.178 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_111
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_TW
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-09-24 11:35:20.835
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Java'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 12:02:51.875
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 12:02:51.883
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.recommenders.models.rcp 1 11 2017-09-24 12:02:53.922
+!MESSAGE The model index service was accessed either before it started or after it finished running.
+!STACK 0
+org.eclipse.recommenders.utils.Logs$LogTraceException
+	at org.eclipse.recommenders.utils.Logs$LogTraceException.newTrace(Logs.java:381)
+	at org.eclipse.recommenders.utils.Logs.log(Logs.java:134)
+	at org.eclipse.recommenders.utils.Logs.log(Logs.java:126)
+	at org.eclipse.recommenders.internal.models.rcp.EclipseModelIndex.suggest(EclipseModelIndex.java:212)
+	at org.eclipse.recommenders.models.SimpleModelProvider.acquireModel(SimpleModelProvider.java:70)
+	at org.eclipse.recommenders.models.PoolingModelProvider.access$0(PoolingModelProvider.java:1)
+	at org.eclipse.recommenders.models.PoolingModelProvider$ModelPoolFactoryMediator.makeObject(PoolingModelProvider.java:96)
+	at org.eclipse.recommenders.models.PoolingModelProvider$ModelPoolFactoryMediator.makeObject(PoolingModelProvider.java:1)
+	at org.apache.commons.pool.impl.GenericKeyedObjectPool.borrowObject(GenericKeyedObjectPool.java:1220)
+	at org.eclipse.recommenders.models.PoolingModelProvider.acquireModel(PoolingModelProvider.java:67)
+	at org.eclipse.recommenders.internal.calls.rcp.RcpCallModelProvider.acquireModel(RcpCallModelProvider.java:65)
+	at org.eclipse.recommenders.internal.calls.rcp.RcpCallModelProvider.acquireModel(RcpCallModelProvider.java:1)
+	at org.eclipse.recommenders.internal.models.rcp.PrefetchModelArchiveJob.run(PrefetchModelArchiveJob.java:43)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.debug.ui 4 120 2017-09-24 12:32:06.962
+!MESSAGE No tab group defined for launch configuration type org.eclipse.wst.server.ui.launchConfigurationType
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2017-09-24 12:46:03.378
+!MESSAGE assertion failed: 
+!STACK 0
+org.eclipse.core.runtime.AssertionFailedException: assertion failed: 
+	at org.eclipse.core.runtime.Assert.isTrue(Assert.java:110)
+	at org.eclipse.core.runtime.Assert.isTrue(Assert.java:96)
+	at org.eclipse.jface.text.Position.<init>(Position.java:63)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ELGeneratorVisitor.append(ELGeneratorVisitor.java:213)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ELGeneratorVisitor.append(ELGeneratorVisitor.java:188)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ELGeneratorVisitor.visit(ELGeneratorVisitor.java:624)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ASTLiteral.jjtAccept(ASTLiteral.java:28)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.SimpleNode.childrenAccept(SimpleNode.java:70)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ELGeneratorVisitor.visit(ELGeneratorVisitor.java:495)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ASTValuePrefix.jjtAccept(ASTValuePrefix.java:28)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.SimpleNode.childrenAccept(SimpleNode.java:70)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ELGeneratorVisitor.visit(ELGeneratorVisitor.java:476)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ASTValue.jjtAccept(ASTValue.java:28)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.SimpleNode.childrenAccept(SimpleNode.java:70)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ELGeneratorVisitor.visit(ELGeneratorVisitor.java:455)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ASTUnaryExpression.jjtAccept(ASTUnaryExpression.java:28)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ELGeneratorVisitor.visit(ELGeneratorVisitor.java:431)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ASTChoiceExpression.jjtAccept(ASTChoiceExpression.java:28)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.SimpleNode.childrenAccept(SimpleNode.java:70)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ELGeneratorVisitor.visit(ELGeneratorVisitor.java:280)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ASTExpression.jjtAccept(ASTExpression.java:28)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.ELGenerator.generate(ELGenerator.java:51)
+	at org.eclipse.jst.jsp.core.internal.java.jspel.JSPELTranslator.translateEL(JSPELTranslator.java:68)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslator.translateEL(JSPTranslator.java:1879)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslator.translateEmbeddedJSPInAttribute(JSPTranslator.java:2039)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslator.checkAllAttributeValueContainers(JSPTranslator.java:1688)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslator.translateXMLNode(JSPTranslator.java:1654)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslator.translateRegionContainer(JSPTranslator.java:1426)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslator.translate(JSPTranslator.java:1203)
+	at org.eclipse.jst.jsp.core.internal.java.JSPTranslationAdapter.getJSPTranslation(JSPTranslationAdapter.java:152)
+	at org.eclipse.jst.jsp.core.internal.validation.JSPJavaValidator.performValidation(JSPJavaValidator.java:327)
+	at org.eclipse.jst.jsp.core.internal.validation.JSPJavaValidator.validateFile(JSPJavaValidator.java:430)
+	at org.eclipse.jst.jsp.core.internal.validation.JSPValidator.validate(JSPValidator.java:196)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:250)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:208)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:89)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2017-09-24 12:47:17.334
+!MESSAGE Several ports (8005, 8081, 8009) required by Tomcat v7.0 Server at localhost are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2017-09-24 12:47:21.416
+!MESSAGE Several ports (8005, 8081, 8009) required by Tomcat v7.0 Server at localhost are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2017-09-24 13:04:24.525
+!MESSAGE Several ports (8005, 8081, 8009) required by Tomcat v7.0 Server at localhost are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 13:59:52.546
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 13:59:52.550
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 14:10:08.307
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 14:10:08.315
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 14:10:08.333
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 14:10:08.338
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 14:10:28.838
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 14:10:28.851
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2017-09-24 14:19:43.286
+!MESSAGE Several ports (8005, 8081, 8009) required by Tomcat v7.0 Server at localhost are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+!SESSION 2017-09-24 14:20:02.734 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_111
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_TW
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-09-24 14:20:11.324
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Java'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 14:44:06.462
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 14:44:06.467
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 14:44:06.485
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 14:44:06.490
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 15:10:26.022
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 15:10:26.028
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2017-09-24 15:19:50.877
+!MESSAGE Several ports (8005, 8081, 8009) required by Tomcat v7.0 Server at localhost are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2017-09-24 16:49:31.197
+!MESSAGE Port 8005 required by Tomcat v7.0 Server at localhost is already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2017-09-24 16:55:33.442
+!MESSAGE Port 8005 required by Tomcat v7.0 Server at localhost is already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+!SESSION 2017-09-24 18:02:48.936 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_111
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_TW
+Framework arguments:  -product org.eclipse.epp.package.jee.product -product org.eclipse.epp.package.jee.product -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product -product org.eclipse.epp.package.jee.product -data C:\BA103G1-WebApp\BA103G1_workspace -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-09-24 18:02:56.155
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Java'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 18:14:54.696
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-09-24 18:14:54.700
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'

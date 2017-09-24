@@ -24,15 +24,6 @@ import com.PetImage.model.PetImageService;
 import com.PetImage.model.PetImageVO;
 
 public class PassImageServlet extends HttpServlet {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
 	Connection con = null;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -41,9 +32,8 @@ public class PassImageServlet extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream(); // 用二位元輸出到瀏覽器
 		String petNo = req.getParameter("petNo");
 		int index = Integer.parseInt(req.getParameter("index"));
-		System.out.println(petNo);
+//		System.out.println(petNo);
 		try {
-			con = ds.getConnection();
 			Statement stmt = con.createStatement(); // 下SQL指令
 			ResultSet rs = stmt.executeQuery( // 執行後丟到RS
 					"SELECT petPicture FROM petImage WHERE petNo=" + petNo);

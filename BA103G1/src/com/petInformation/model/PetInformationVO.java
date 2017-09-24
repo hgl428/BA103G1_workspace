@@ -121,8 +121,8 @@ public class PetInformationVO implements java.io.Serializable {
 		return TNR;
 	}
 
-	public void setTNR(String tNR) {
-		TNR = tNR;
+	public void setTNR(String TNR) {
+		TNR = TNR;
 	}
 
 	public String getSituation() {

@@ -318,14 +318,14 @@ public class EmpServlet extends HttpServlet {
 				
 				/***************************��L�i�઺���~�B�z**********************************/
 			} catch (Exception e) {
-				errorMsgs.add("�R����ƥ���:"+e.getMessage());
+				errorMsgs.add("ERROR:"+e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
 		}
 		
-		if ("listEmps_ByCompositeQuery".equals(action)) { // �Ӧ�select_page.jsp���ƦX�d�߽ШD
+		if ("listEmps_ByCompositeQuery".equals(action)) { 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -352,7 +352,7 @@ public class EmpServlet extends HttpServlet {
 				List<EmpVO> list  = empSvc.getAll(map);
 				
 				/***************************3.�d�ߧ���,�ǳ����(Send the Success view)************/
-				req.setAttribute("listEmps_ByCompositeQuery", list); // ��Ʈw���X��list����,�s�Jrequest
+				req.setAttribute("listEmps_ByCompositeQuery", list); // 
 				RequestDispatcher successView = req.getRequestDispatcher("/emp/listEmps_ByCompositeQuery.jsp"); // ���\���listEmps_ByCompositeQuery.jsp
 				successView.forward(req, res);
 				

@@ -126,7 +126,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log." suffix=".txt"/>
 
-      <Context docBase="C:\BA103G1-WebApp\BA103G1_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\BA103G1-WebApp\BA103G1_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BA103G1" path="/BA103G1" reloadable="true" source="org.eclipse.jst.jee.server:BA103G1"/><Context docBase="C:\BA103G1-WebApp\BA103G1_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\IBM_emp_0403MVC_Associations3_CompositeQuery2" path="/IBM_emp_0403MVC_Associations3_CompositeQuery2" reloadable="true" source="org.eclipse.jst.j2ee.server:IBM_emp_0403MVC_Associations3_CompositeQuery2"/></Host>
+      <Context docBase="C:\BA103G1-WebApp\BA103G1_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\BA103G1-WebApp\BA103G1_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BA103G1" path="/BA103G1" reloadable="true" source="org.eclipse.jst.jee.server:BA103G1"/></Host>
     </Engine>
   </Service>
 </Server>

@@ -60,7 +60,7 @@ public class PetInformationServlet extends HttpServlet {
 				// return;// 程式中斷
 				// }
 				Integer memNo = 123456;
-				System.out.println("*1111111111111111111111111111111111111111111111----");
+		
 				String petSex = req.getParameter("petSex");
 
 				Integer speciesNo = null;
@@ -70,7 +70,7 @@ public class PetInformationServlet extends HttpServlet {
 					speciesNo = Integer.parseInt(req.getParameter("speciesNo"));
 				}
 				String petColor = req.getParameter("petColor").trim();
-				System.out.println("*2222222222222222222222222222222222222----");
+				
 				Integer breedNo = null;
 				if (req.getParameter("petBreed").trim().length() == 0) {
 					errorMsgs.put("petBreed", "請選擇一個品種");
@@ -81,7 +81,7 @@ public class PetInformationServlet extends HttpServlet {
 				String petAge = req.getParameter("petAge").trim();
 
 				String petSize = req.getParameter("petSize").trim();
-				System.out.println("*33333333333333333333333333333333333333----");
+//			
 				String position = null;
 
 				if (req.getParameter("position").trim().length() == 0) {
@@ -100,9 +100,9 @@ public class PetInformationServlet extends HttpServlet {
 				String petPosition = position + addr;
 
 				String petIc = req.getParameter("petIc").trim();
-				System.out.println("*444444444444444444444444444444444----");
+			
 				String TNR = req.getParameter("TNR").trim();
-
+				
 				String petTitle = req.getParameter("petTitle").trim();
 
 				String situation = req.getParameter("situation").trim();
@@ -129,7 +129,7 @@ public class PetInformationServlet extends HttpServlet {
 				petInfoVO.setPetFilm(petFilm);
 
 				printlog(errorMsgs, petInfoVO);
-				System.out.println("*55555555555555555555555555----");
+				
 				if (!errorMsgs.isEmpty()) {
 
 					req.setAttribute("PetInformationVO", petInfoVO);
@@ -154,7 +154,7 @@ public class PetInformationServlet extends HttpServlet {
 				speciesVO.setSpeciesNo(speciesNo);
 
 				if (!errorMsgs.isEmpty()) {
-					System.out.println("*---333----");
+				
 					req.setAttribute("PetSpeciesVO", speciesVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
 					failureView.forward(req, res);
@@ -184,7 +184,7 @@ public class PetInformationServlet extends HttpServlet {
 				petImage1 = buffer.toByteArray(); // 把圖一轉成byte陣列
 				req.setAttribute("petImageVO", petImage);
 				// }
-				// System.out.println("1"+petImage1);
+			
 
 				String picName1 = null;
 				if (req.getParameter("picName1").trim().length() == 0) {
@@ -207,15 +207,15 @@ public class PetInformationServlet extends HttpServlet {
 					return;
 				}
 
-				// System.out.println("2"+petImage1);
+		
 				/*************************** 2.開始查詢資料 *****************************************/
 
 				PetInformationService petInfoSvc = new PetInformationService();
 				PetInformationVO petInfo = petInfoSvc.addPetInfo(memNo, breedNo, petName, petAge, petSize, petColor,
 						petPosition, petIc, TNR, situation, petFilm, petTitle, Longitude, Latitude, petSex);
 				// System.out.println("3"+petImage1);
-				PetSpeciesService petSpeciesSvc = new PetSpeciesService();
-				PetSpeciesVO species = petSpeciesSvc.addPetSpecies(speciesNo);
+//				PetSpeciesService petSpeciesSvc = new PetSpeciesService();
+//				PetSpeciesVO species = petSpeciesSvc.addPetSpecies(speciesNo);
 				// System.out.println("4"+petImage1);
 				// System.out.println(petInfo.getPetNo());
 				PetImageService petImgSvc = new PetImageService();
@@ -227,7 +227,7 @@ public class PetInformationServlet extends HttpServlet {
 				 * 3.新增完成,準備轉交(Send the Success view)
 				 ***********/
 				req.setAttribute("PetInformationVO", petInfo);
-				req.setAttribute("PetSpeciesVO", species);
+				
 				req.setAttribute("PetImageVO", petPic);
 				String url = "/JSP/IpetB/adoption.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交addAdopt.jsp
@@ -235,7 +235,7 @@ public class PetInformationServlet extends HttpServlet {
 			}
 
 			catch (Exception e) {
-				System.out.println("1111111111111111111");
+				
 				errorMsgs.put("Exception", e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
 				failureView.forward(req, res);
