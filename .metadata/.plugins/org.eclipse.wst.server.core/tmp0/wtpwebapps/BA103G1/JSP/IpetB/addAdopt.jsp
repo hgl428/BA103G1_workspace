@@ -218,6 +218,7 @@
 							<option value="中型">中型</option>
 							<option value="小型">小型</option>
 						</select>
+						<font color="red">${errorMsgs.petSize}</font>
 					</div>
 
 					<div class="form-group petPosition">
@@ -247,6 +248,7 @@
 							<option value="金門縣">金門縣</option>
 							<option value="連江縣">連江縣</option>
 						</select>
+						<font color="red">${errorMsgs.position}</font>
 					</div>
 					<div class="form-group">
 						<span class="text-danger">*</span><label for="keyAddr">送養地址</label>
@@ -299,7 +301,7 @@
 							for="image">照片名稱</label> <input type="text" class="form-control"
 							id="picName1" name="picName1" placeholder="請填入照片名稱"
 							value="${param.picName}">
-						<font color="red">${errorMsgs.picName}</font>
+						<font color="red">${errorMsgs.picName1}</font>
 
 					</div>
 
