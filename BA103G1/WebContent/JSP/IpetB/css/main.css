@@ -515,12 +515,16 @@ body {
 
 .add-content {
     padding-top: 100px;
+    padding-bottom: 20px;
     height: 100vh;
-    overflow: hidden;
+    overflow-y: auto;
     background-color: #fff;
     /*background-image: url(../images/cat25.jpg);*/
     background-position: -30% 5%;
     background-repeat: no-repeat;
+}
+.add-img {
+    position: fixed;
 }
 .add-content img {
     margin-top: -23px;
@@ -533,10 +537,11 @@ body {
     border: 1px solid #ccc;
     background-color: #fff;
     border-radius: 5px;
-    height: 600px;
-    overflow-y: auto;
+    /*height: 600px;*/
+    /*overflow-y: auto;*/
     box-shadow: 5px 2px 20px #d9edf7;
 }
+
 
 .add-content .fa {
     font-size: 23px;
@@ -568,9 +573,7 @@ body {
     font-size: 18px;
     margin-right: 5px;
 }
-.add-content img {
-    margin-top: 23px;
-}
+
 .add-content input[type=file]{
     width: 100%;
 }

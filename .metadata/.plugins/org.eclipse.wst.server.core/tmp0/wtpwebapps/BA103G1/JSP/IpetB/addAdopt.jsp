@@ -8,10 +8,10 @@
 <%@ page import="java.util.*"%>
 
 <%
-	PetInformationVO petInfoVO = (PetInformationVO) request.getAttribute("PetInformationVO");  //記憶動物table寫錯資料時，其他正確的內容
-	PetBreedVO breedVOe = (PetBreedVO) request.getAttribute("PetBreedVO");  //記憶使用者輸入品種的選項，
-	PetSpeciesVO speciesVO = (PetSpeciesVO) request.getAttribute("PetSpeciesVO");  //記憶使用者輸入種類的選項
-	PetImageVO imageVO =(PetImageVO) request.getAttribute("PetImageVO");  //記憶使用者輸入的照片和標題
+	PetInformationVO petInfoVO = (PetInformationVO) request.getAttribute("PetInformationVO"); //記憶動物table寫錯資料時，其他正確的內容
+	PetBreedVO breedVOe = (PetBreedVO) request.getAttribute("PetBreedVO"); //記憶使用者輸入品種的選項，
+	PetSpeciesVO speciesVO = (PetSpeciesVO) request.getAttribute("PetSpeciesVO"); //記憶使用者輸入種類的選項
+	PetImageVO imageVO = (PetImageVO) request.getAttribute("PetImageVO"); //記憶使用者輸入的照片和標題
 %>
 
 
@@ -26,8 +26,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/JSP/IpetB/css/main.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/JSP/IpetB/css/nav.css">
+
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -37,6 +36,11 @@
 <script type="text/javascript"
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVTvj_0kUlIT4NDFTo4AV0ZJbliitGrPQ"></script>
 <script src="js/Address.js"></script>
+
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/JSP/IpetB/css/main.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/JSP/IpetB/css/nav.css">
 <script src="<%=request.getContextPath()%>/JSP/IpetB/js/main.js"></script>
 
 
@@ -44,7 +48,7 @@
 </head>
 
 <body>
-${PetBreedVO }
+	${PetBreedVO }
 	<!--第一區：nav區-->
 	<div class="b_nav">
 		<div class="container">
@@ -130,43 +134,47 @@ ${PetBreedVO }
 	<!--各頁主內容寫在這-->
 	<div class="add-content">
 		<div class="container">
-			<div class="col-sm-6">
+			<div class="col-sm-6 add-img">
 				<img src="images/cat25.jpg" alt="">
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-6 pull-right">
 				<h3>
-					<i class="fa fa-pencil-square-o" aria-hidden="true"></i> 填寫送養資料
+					<i class="fa fa-pencil-square-o" aria-hidden="true"></i>填寫送養資料
 				</h3>
-				<form class="col-xs-12 col-sm-12" METHOD="post"  enctype="multipart/form-data"				
+
+				<form class="col-xs-12 col-sm-12" METHOD="post"
+					enctype="multipart/form-data"
 					ACTION="<%=request.getContextPath()%>/JSP/IpetB/addAdopt.do"
 					name="add">
 					<div class="form-group petName">
-						*<label for="petName">動物姓名</label> <input type="text"
+						<span class="text-danger">*</span><label for="petName">動物姓名</label> <input type="text"
 							class="form-control" name="petName" placeholder="請填入動物的名字或暱稱"
-							value="${petInfoVO.petName}" /> <font color="red">${errorMsgs.petName}</font>
+							value="${param.petName}" /> <font color="red">${errorMsgs.petName}</font>
 					</div>
 
 					<div class="form-group petSex">
 						*<label class="radio-inline">動物性別</label> <input type="radio"
-							name="petSex" value="公"checked> 公 <input type="radio"
-							name="petSex" value="母" > 母
+							name="petSex" value="公" checked> 公 <input type="radio"
+							name="petSex" value="母"> 母
 					</div>
-       <jsp:useBean id="speciesSvc" scope="page" class="com.PetSpecies.model.PetSpeciesService" />
+					<jsp:useBean id="speciesSvc" scope="page"
+						class="com.PetSpecies.model.PetSpeciesService" />
 					<div class="form-group species">
 						<span class="text-danger">*</span><label for="species">動物類型</label>
 						<select class="form-control" name="speciesNo">
-							<option value="">請選擇</option>
+							<option value="${param.speciesNo}">請選擇</option>
 							<c:forEach var="speciesVO" items="${speciesSvc.all}">
-								<option value="${speciesVO.speciesNo}" ${(PetSpeciesVO.speciesNo==speciesVO.speciesNo)? 'selected':'' }>${speciesVO.speciesName}</option>
+								<option value="${speciesVO.speciesNo}"
+									${(PetSpeciesVO.speciesNo==speciesVO.speciesNo)? 'selected':'' }>${speciesVO.speciesName}</option>
 							</c:forEach>
-						</select>
-
+						</select> 
+						<font color="red">${errorMsgs.speciesNo}</font>
 					</div>
 
 					<div class="form-group petColor">
 						<span class="text-danger">*</span><label for="petColor">毛色</label>
 						<select class="form-control" name="petColor">
-							<option value="noChoose">請選擇</option>
+							<option value="${param.petColor}">請選擇</option>
 							<option value="黑">黑</option>
 							<option value="白">白</option>
 							<option value="黑白">黑白</option>
@@ -178,24 +186,28 @@ ${PetBreedVO }
 							<option value="咖啡">咖啡</option>
 							<option value="其他">其他</option>
 						</select>
+							<font color="red">${errorMsgs.petColor}</font>
 					</div>
+					
 					<jsp:useBean id="breedSvc" scope="page"
 						class="com.PetBreed.model.PetBreedService" />
 					<div class="form-group breed">
 						<span class="text-danger">*</span><label for="petColor">動物品種</label>
 						<select class="form-control" name="petBreed">
 
-							<option value="">請選擇</option>
+							<option value="${param.petBreed}">請選擇</option>
 							<c:forEach var="breedVO" items="${breedSvc.all}">
-								<option value="${breedVO.breedNo}" ${(PetBreedVO.breedNo==breedVO.breedNo)? 'selected':'' }>${breedVO.breedName}</option>
+								<option value="${breedVO.breedNo}"
+									${(PetBreedVO.breedNo==breedVO.breedNo)? 'selected':'' }>${breedVO.breedName}</option>
 							</c:forEach>
 						</select>
+						<font color="red">${errorMsgs.petBreed}</font>
 					</div>
 
 					<div class="form-group petAge">
 						<span class="text-danger">*</span><label class="radio-inline">年齡</label>
-						<input type="radio" name="petAge" value="成年"checked> 成年
-						<input type="radio" name="petAge" value="幼年"> 幼年
+						<input type="radio" name="petAge" value="成年" checked> 成年 <input
+							type="radio" name="petAge" value="幼年"> 幼年
 					</div>
 
 					<div class="form-group petSize">
@@ -239,27 +251,26 @@ ${PetBreedVO }
 					<div class="form-group">
 						<span class="text-danger">*</span><label for="keyAddr">送養地址</label>
 						<input type="text" class="form-control" id="addr" name="addr"
-							placeholder="請填入寵物所在地址"
-							value="${param.addr}">
-						<font color="red">${errorMsgs.addr}</font>
+							placeholder="請填入寵物所在地址" value="${param.addr}"> <font
+							color="red">${errorMsgs.addr}</font>
 					</div>
 
 
 					<div class="form-group petIc">
 						<label class="radio-inline">晶片</label> <input type="radio"
 							name="petIc" value="有"> 有 <input type="radio"
-							name="petIc" value="無"checked> 無
+							name="petIc" value="無" checked> 無
 					</div>
 
 					<div class="form-group tnr">
 						<label class="radio-inline">絕育</label> <input type="radio"
 							name="TNR" value="是"> 是 <input type="radio" name="TNR"
-							value="否"checked> 否
+							value="否" checked> 否
 					</div>
 
 					<div class="form-group petTitle">
 						<span class="text-danger">*</span><label for="petTitle">送養標題</label>
-						<input type="text" class="form-control" name="petTitle"
+						<input type="text" class="form-control" name="petTitle" value="${param.petTitle}"
 							placeholder="請填入十個字內的送養標題"> <font color="red">${errorMsgs.petTitle}</font>
 					</div>
 
@@ -281,16 +292,15 @@ ${PetBreedVO }
 					</div>
 
 					<div class="form-group col-sm-6">
-						<label for="petImage"> 動物照片上傳 
-						</label> <input type="file" class="form-control-file" name="petImage1" value=""
+						<label for="petImage"> 動物照片上傳 </label> <input type="file"
+							class="form-control-file" name="petImage1" value=""
 							aria-describedby="fileHelp"> <small name="igname"
-							class="form-text text-muted"></small>
-							<span class="text-danger">*</span><label for="image">照片名稱</label>
-						<input type="text" class="form-control" id="picName1" name="picName1"
-							placeholder="請填入照片名稱"
-							value="<%=(imageVO == null) ? "" : imageVO.getPicName()%>">
+							class="form-text text-muted"></small> <span class="text-danger">*</span><label
+							for="image">照片名稱</label> <input type="text" class="form-control"
+							id="picName1" name="picName1" placeholder="請填入照片名稱"
+							value="${param.picName}">
 						<font color="red">${errorMsgs.picName}</font>
-						
+
 					</div>
 
 					<div class="form-group col-sm-6">

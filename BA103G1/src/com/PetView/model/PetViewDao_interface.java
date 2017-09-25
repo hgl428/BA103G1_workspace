@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface PetViewDao_interface {
 
-	public List<PetViewVO> getSome();
+	public PetViewVO findByPetNo(Integer petNo);
 	
 	public List<PetViewVO> getAll();
 

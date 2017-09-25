@@ -1,0 +1,36 @@
+package com.PetView.controller;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.PetView.model.PetViewService;
+import com.PetView.model.PetViewVO;
+
+@WebServlet("/PetViewDatailServlet")
+public class PetViewDetailServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	public PetViewDetailServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+	// TODO Auto-generated method stub
+		req.setCharacterEncoding("UTF-8");
+		Integer petNo = Integer.parseInt(req.getParameter("petNo"));
+		// 用getParameter的方法得到?後面的名稱去取得   就等於form表單得到name一樣  去抓到值(動物的編號)
+		System.out.println(petNo);
+		
+		PetViewService petViewSvc = new PetViewService();
+		PetViewVO petviewVO = petViewSvc.getOnePet(petNo);
+		
+	
+	}
+
+}

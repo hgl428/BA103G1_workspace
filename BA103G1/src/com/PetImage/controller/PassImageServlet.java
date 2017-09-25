@@ -30,9 +30,12 @@ public class PassImageServlet extends HttpServlet {
 
 		res.setContentType("image/gif"); // 傳進來是圖片型態
 		ServletOutputStream out = res.getOutputStream(); // 用二位元輸出到瀏覽器
-		String petNo = req.getParameter("petNo");
+//		String petNo = req.getParameter("petNo");
+		Integer petNo = Integer.parseInt(req.getParameter("petNo"));
 		int index = Integer.parseInt(req.getParameter("index"));
-//		System.out.println(petNo);
+//		System.out.println("幾號動物的圖"+petNo);
+//		System.out.println("有多少圖"+index);
+		
 		try {
 			Statement stmt = con.createStatement(); // 下SQL指令
 			ResultSet rs = stmt.executeQuery( // 執行後丟到RS

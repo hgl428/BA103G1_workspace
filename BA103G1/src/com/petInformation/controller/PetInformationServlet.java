@@ -4,8 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
+
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -15,16 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.PetBreed.model.PetBreedService;
+
 import com.PetBreed.model.PetBreedVO;
 import com.PetImage.model.PetImageService;
 import com.PetImage.model.PetImageVO;
-import com.PetSpecies.model.PetSpeciesService;
+
 import com.PetSpecies.model.PetSpeciesVO;
 import com.petInformation.model.*;
 
 @MultipartConfig(fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 5 * 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024
-		* 1024)
+		* 1024)    //要東西要上傳必填
 public class PetInformationServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -48,7 +47,13 @@ public class PetInformationServlet extends HttpServlet {
 				 * 把要新增的內容都列出來
 				 **********************/
 
-				String petName = req.getParameter("petName").trim();
+				String petName = req.getParameter("petName");
+				if (req.getParameter("petName").trim().length() == 0) {
+					errorMsgs.put("petName", "請填寫動物名稱");
+				} else {
+					petName = req.getParameter("petName");
+				}
+
 				// if (petName == null || (petName.trim()).length() == 0) {
 				// errorMsgs.add("請輸入動物名稱");
 				// }
@@ -60,7 +65,7 @@ public class PetInformationServlet extends HttpServlet {
 				// return;// 程式中斷
 				// }
 				Integer memNo = 123456;
-		
+
 				String petSex = req.getParameter("petSex");
 
 				Integer speciesNo = null;
@@ -69,8 +74,12 @@ public class PetInformationServlet extends HttpServlet {
 				} else {
 					speciesNo = Integer.parseInt(req.getParameter("speciesNo"));
 				}
-				String petColor = req.getParameter("petColor").trim();
-				
+				String petColor = req.getParameter("petColor");
+				if (req.getParameter("ppetColor").trim().length() == 0) {
+					errorMsgs.put("petColor", "請選擇一個毛色");
+				} else {
+					petColor = req.getParameter("petColor");
+				}
 				Integer breedNo = null;
 				if (req.getParameter("petBreed").trim().length() == 0) {
 					errorMsgs.put("petBreed", "請選擇一個品種");
@@ -81,11 +90,11 @@ public class PetInformationServlet extends HttpServlet {
 				String petAge = req.getParameter("petAge").trim();
 
 				String petSize = req.getParameter("petSize").trim();
-//			
+				//
 				String position = null;
 
 				if (req.getParameter("position").trim().length() == 0) {
-					errorMsgs.put("postion", "請選擇縣市");
+					errorMsgs.put("position", "請選擇縣市");
 				} else {
 					position = req.getParameter("position");
 				}
@@ -100,9 +109,9 @@ public class PetInformationServlet extends HttpServlet {
 				String petPosition = position + addr;
 
 				String petIc = req.getParameter("petIc").trim();
-			
+
 				String TNR = req.getParameter("TNR").trim();
-				
+
 				String petTitle = req.getParameter("petTitle").trim();
 
 				String situation = req.getParameter("situation").trim();
@@ -129,7 +138,7 @@ public class PetInformationServlet extends HttpServlet {
 				petInfoVO.setPetFilm(petFilm);
 
 				printlog(errorMsgs, petInfoVO);
-				
+
 				if (!errorMsgs.isEmpty()) {
 
 					req.setAttribute("PetInformationVO", petInfoVO);
@@ -154,7 +163,7 @@ public class PetInformationServlet extends HttpServlet {
 				speciesVO.setSpeciesNo(speciesNo);
 
 				if (!errorMsgs.isEmpty()) {
-				
+
 					req.setAttribute("PetSpeciesVO", speciesVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
 					failureView.forward(req, res);
@@ -184,7 +193,6 @@ public class PetInformationServlet extends HttpServlet {
 				petImage1 = buffer.toByteArray(); // 把圖一轉成byte陣列
 				req.setAttribute("petImageVO", petImage);
 				// }
-			
 
 				String picName1 = null;
 				if (req.getParameter("picName1").trim().length() == 0) {
@@ -207,15 +215,15 @@ public class PetInformationServlet extends HttpServlet {
 					return;
 				}
 
-		
 				/*************************** 2.開始查詢資料 *****************************************/
 
 				PetInformationService petInfoSvc = new PetInformationService();
 				PetInformationVO petInfo = petInfoSvc.addPetInfo(memNo, breedNo, petName, petAge, petSize, petColor,
 						petPosition, petIc, TNR, situation, petFilm, petTitle, Longitude, Latitude, petSex);
 				// System.out.println("3"+petImage1);
-//				PetSpeciesService petSpeciesSvc = new PetSpeciesService();
-//				PetSpeciesVO species = petSpeciesSvc.addPetSpecies(speciesNo);
+				// PetSpeciesService petSpeciesSvc = new PetSpeciesService();
+				// PetSpeciesVO species =
+				// petSpeciesSvc.addPetSpecies(speciesNo);
 				// System.out.println("4"+petImage1);
 				// System.out.println(petInfo.getPetNo());
 				PetImageService petImgSvc = new PetImageService();
@@ -227,7 +235,7 @@ public class PetInformationServlet extends HttpServlet {
 				 * 3.新增完成,準備轉交(Send the Success view)
 				 ***********/
 				req.setAttribute("PetInformationVO", petInfo);
-				
+
 				req.setAttribute("PetImageVO", petPic);
 				String url = "/JSP/IpetB/adoption.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交addAdopt.jsp
@@ -235,7 +243,7 @@ public class PetInformationServlet extends HttpServlet {
 			}
 
 			catch (Exception e) {
-				
+
 				errorMsgs.put("Exception", e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/addAdopt.jsp");
 				failureView.forward(req, res);
@@ -252,7 +260,7 @@ public class PetInformationServlet extends HttpServlet {
 		} else if (petInfoVO.getPetColor() == null || petInfoVO.getPetColor().trim().length() == 0) {
 			errorMsgs.put("petColor", "毛色請勿空白");
 		} else if (petInfoVO.getPetAge() == null || petInfoVO.getPetAge().trim().length() == 0) {
-			errorMsgs.put("petColor", "年紀請勿空白");
+			errorMsgs.put("petAge", "年紀請勿空白");
 		} else if (petInfoVO.getPetPosition() == null || petInfoVO.getPetPosition().trim().length() == 0) {
 			errorMsgs.put("petPostion", "送養地點請勿空白");
 		} else if (petInfoVO.getPetTitle() == null || petInfoVO.getPetTitle().trim().length() == 0) {

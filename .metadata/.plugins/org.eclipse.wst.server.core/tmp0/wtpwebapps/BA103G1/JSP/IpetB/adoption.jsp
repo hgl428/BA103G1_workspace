@@ -5,7 +5,7 @@
 <%@ page import="com.PetSpecies.model.*"%>
 <%@ page import="com.petInformation.model.*"%>
 <%@ page import="com.PetImage.model.*"%>
-<%@ page import="com.PetView.model.*" %>
+<%@ page import="com.PetView.model.*"%>
 <%@ page import="com.PetBreed.model.*"%>
 <%
 	PetSpeciesService speciesSvc = new PetSpeciesService();
@@ -13,9 +13,9 @@
 	List<PetSpeciesVO> species = speciesSvc.getAll();
 	pageContext.setAttribute("species", species);
 
-	PetInformationService petInfoSvc = new PetInformationService();
-	List<PetInformationVO> list = petInfoSvc.getAll();
-	pageContext.setAttribute("list", list);
+	// 	PetInformationService petInfoSvc = new PetInformationService();
+	// 	List<PetInformationVO> list = petInfoSvc.getAll();
+	// 	pageContext.setAttribute("list", list);
 
 	PetBreedService breedsvc = new PetBreedService();
 	pageContext.setAttribute("breedSvc", breedsvc);
@@ -25,21 +25,18 @@
 	PetImageService picSvc = new PetImageService();
 	List<PetImageVO> imageList = picSvc.getAll();
 	pageContext.setAttribute("PetImageVO", imageList);
-	
-	
-	
-// 		PetViewService petviewSvc = new PetViewService();
-// 		List<PetViewVO> list2 = petviewSvc.getAll();
-// 	    pageContext.setAttribute("list2", list2);
-	
-	List<PetViewVO> list2= (List<PetViewVO>) request.getAttribute("petViewList");
-	if (list2==null){
-		PetViewService petviewSvc = new PetViewService();
+
+	// 		PetViewService petviewSvc = new PetViewService();
+	// 		List<PetViewVO> list2 = petviewSvc.getAll();
+	// 	    pageContext.setAttribute("list2", list2);
+
+	List<PetViewVO> list2 = (List<PetViewVO>) request.getAttribute("petViewList"); //使用者輸入查詢條件後來查到東西list2
+	if (list2 == null) { // 一開始如果list2沒東西，就自動產生預先想呈現的內容
+		PetViewService petviewSvc = new PetViewService(); //把view裡面的東西生出來
 		list2 = petviewSvc.getAll();
 	}
-	pageContext.setAttribute("list2", list2);
-// 	System.out.println("AAAAAA"+list2.size());
-	
+	pageContext.setAttribute("list2", list2); //把list2set到page給本頁用
+	// 	System.out.println("AAAAAA"+list2.size());
 %>
 
 
@@ -56,19 +53,21 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/JSP/IpetB/css/main.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/JSP/IpetB/css/nav.css">
 
 <!-- <script src="js/main.js"></script> -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/JSP/IpetB/css/main.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/JSP/IpetB/css/nav.css">
+
 <script src="<%=request.getContextPath()%>/JSP/IpetB/js/main.js"></script>
 <script type="text/javascript"
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVTvj_0kUlIT4NDFTo4AV0ZJbliitGrPQ"></script>
 <script type="text/javascript">
-
 	$(function() {
 		//定義經緯度位置: 以中央大學為中心
 		var latlng = new google.maps.LatLng(24.9686, 121.1956658);
@@ -192,13 +191,12 @@
 						<div class="conditions-area">
 							<div class="col-sm-12">
 
-								<label for="aaa"></label> 
-								<input type="text" name="textSearch" placeholder="請輸入搜尋關鍵字">
+								<label for="aaa"></label> <input type="text" name="textSearch"
+									placeholder="請輸入搜尋關鍵字">
 							</div>
 
 							<div class="col-sm-12">
-								<label for="speciesNo">動物類型</label> 
-								<select name="speciesNo">
+								<label for="speciesNo">動物類型</label> <select name="speciesNo">
 									<option value="">請選擇</option>
 									<c:forEach var="species" items="${species}">
 										<option value="${species.speciesNo}">${species.speciesName}</option>
@@ -207,8 +205,8 @@
 							</div>
 
 							<div class="col-sm-12">
-								<label for="petPosition">動物所在縣市</label> <select
-									id="petPosition" name="petPosition">
+								<label for="petPosition">動物所在縣市</label> <select id="petPosition"
+									name="petPosition">
 									<option value="">請選擇</option>
 									<option value="台北市">台北市</option>
 									<option value="新北市">新北市</option>
@@ -252,139 +250,112 @@
 							</div>
 
 							<div class="col-sm-12 text-right">
-								<input type="hidden" name="action"
-									value="petView">
+								<input type="hidden" name="action" value="petView">
 								<button class="btn btn-default" id="search-now">馬上搜尋</button>
 								<!-- 	
 														<button class="btn btn-info" id="search-more">更多條件</button> -->
 							</div>
-						</div>	
+							<div class="clearfix"></div>
+						</div>
 					</form>
-					<div class="col-sm-12">
-						<div class="more-area">
 
-							<div class="col-sm-10">
-								<div class="row">
-									<!-- 這裡有更多條件，請條列有哪些篩選條件。 -->
+					<!--搜尋條件區結束-->
+					<!--其他區廣告開始-->
+					<div class="ad-area ">
+						<p>廣告區：熱門貼文或是認養心得或是認養需知。</p>
+					</div>
+					<!--其他區廣告結束-->
+				</div>
+			</div>
 
+			<div class="search-result col-xs-12 col-sm-9 col-sm-push-3">
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="map">
 
-									<!-- <div class="col-sm-12">
-                      <label for="petsex">動物性別</label>
-                      <div class="checkbox petSex">
-                        <input type="checkbox" value="">公
-                        <input type="checkbox" value="">母
-                      </div>
-                    </div> -->
-
-
-									<div class="col-sm-12 petColor">
-										<label for="petColor">毛色</label> <select class="form-control"
-											id="petColor">
-											<option value="">請選擇</option>
-											<c:forEach var="petInformationVO" items="${list}">
-												<option value="${petInformationVO.petColor}">${petInformationVO.petColor}</option>
-											</c:forEach>
-										</select>
-									</div>
-								
+							<!--地圖搜尋開始-->
+							<div class="map-search">
+								<input type="text" name="" value="" placeholder="輸入地址查詢位置！">
 							</div>
+							<!--地圖搜尋結束-->
+							<!--google map顯示開始-->
+							<div id="map-canvas"></div>
+							<!--google map顯示結束-->
 
-							<button class="btn btn-default pull-right" id="adopt-search">搜尋</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="title-area left">
+							<div class="tab tab-active">
+								<a href="<%=request.getContextPath()%>/JSP/IpetB/adoption.jsp">依時間排序</a>
+							</div>
+							<div class="tab">依推薦排序</div>
 							<div class="clearfix"></div>
 						</div>
 					</div>
 
-					<div class="clearfix"></div>
+
+					<c:if test="${not empty errorMsgs}">
+							<ul>
+								<c:forEach var="message" items="${errorMsgs}">
+									<li style=font-size:24px;>${message}</li>
+								</c:forEach>
+							</ul>
+						</font>
+					</c:if>
+
+					<div class="posts">
+						<!--第1則-->
+						<c:forEach var="pet" items="${list2}">
+							<div class="box">
+								<div class="row">
 
 
-				</div>
-				<!--搜尋條件區結束-->
-				<!--地圖＋領養方塊區開始-->
-				<!--其他區廣告開始-->
-				<div class="ad-area ">
-					<p>廣告區：熱門貼文或是認養心得或是認養需知。</p>
-				</div>
-				<!--其他區廣告結束-->
-			</div>
-		</div>
+									<div class="post-img col-xs-12 col-sm-4">
+										<img
+											src="<%=request.getContextPath()%>/JSP/IpetB/PetImage.do?petNo=${pet.petNo}&index=1"
+											class="img-responsive">
+									</div>
 
-		<div class="search-result col-xs-12 col-sm-9 col-sm-push-3">
-			<div class="col-sm-12">
-				<div class="row">
-					<div class="map">
+									<div class="post-text  col-xs-12  col-sm-8">
 
-						<!--地圖搜尋開始-->
-						<div class="map-search">
-							<input type="text" name="" value="" placeholder="輸入地址查詢位置！">
-						</div>
-						<!--地圖搜尋結束-->
-						<!--google map顯示開始-->
-						<div id="map-canvas"></div>
-						<!--google map顯示結束-->
+										<h3>
+											<span> ${pet.speciesName} </span> 
+											<a href="<%=request.getContextPath()%>/PetViewDatailServlet?petNo=${pet.petNo}">${pet.petTitle}</a>
 
-					</div>
-				</div>
-			</div>
+										</h3>
 
-			<div class="col-sm-12">
-				<div class="row">
-					<div class="title-area left">
-						<div class="tab tab-active">依時間排序</div>
-						<div class="tab">依推薦排序</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="posts">
-					<!--第1則-->
-					<c:forEach var="pet" items="${list2}">
-						<div class="box">
-							<div class="row">
+										<p class="infomation">
+											<span><span style="color: black">動物名稱：</span>${pet.petName}</span>
+											<span><span style="color: black">品種：</span>${pet.breedName}</span>
+											<span><span style="color: black">年齡：</span>${pet.petAge}</span><br>
+											<span><span style="color: black">地點：</span>${pet.petPosition}</span>
+											<span><span style="color: black">性別：</span>${pet.petSex}</span>
+											<span><span style="color: black">晶片：</span>${pet.petIc}</span>
+										</p>
+										<p class="description">
+											<span><span style="color: black">動物介紹：</span>
+												${pet.situation}</span>
+										</p>
+									</div>
+									<div class="clearfix"></div>
 
-
-								<div class="post-img col-xs-12 col-sm-4">
-									<img
-										src="<%=request.getContextPath()%>/JSP/IpetB/PetImage.do?petNo=${pet.petNo}&index=1"
-										class="img-responsive">
 								</div>
-
-								<div class="post-text  col-xs-12  col-sm-8">
-
-									<h3>
-										<span>
-
-												${pet.speciesName}
-
-										</span> <a href="<%=request.getContextPath()%>/JSP/IpetB/PetImage.do?picNo=${pet.petTitle}">${pet.petTitle}</a>
-
-									</h3>
-
-									<p class="infomation">
-										<span>動物名稱：${pet.petName}</span> 
-										<span>品種：${pet.breedName}</span> 
-										<span>年齡：${pet.petAge}</span> <br>
-										<span>地點：${pet.petPosition}</span>
-										<span>性別：${pet.petSex}</span>
-										<span>晶片：${pet.petIc}</span>
-									</p>
-									<p class="description">
-										<span>動物介紹：</span> ${pet.situation}
-									</p>
-								</div>
-								<div class="clearfix"></div>
-
 							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
 
-					<div class="clearfix"></div>
+						<div class="clearfix"></div>
 
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="clearfix"></div>
-	</div>
-	<!--地圖＋領養方塊區結束-->
+			<div class="clearfix"></div>
+		</div>
+		<!--地圖＋領養方塊區結束-->
 	</div>
 
 

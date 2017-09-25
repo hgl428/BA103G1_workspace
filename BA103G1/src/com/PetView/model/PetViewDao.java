@@ -33,7 +33,7 @@ public class PetViewDao implements PetViewDao_interface {
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String USER = "BA103";
 	private static final String PASSWORD = "123456";
-	private static final String GET_SOME_INFO = "select speciesName,breedName,petTitle,petPosition,situation,petSex,petName from PETALLINFORMATION";
+	private static final String GET_ONE_INFO = "select speciesName,breedName,petNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,petSex from PETALLINFORMATION where petNo=?";
 	private static final String GET_ALL = "select speciesName,breedName,petNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,petSex from PETALLINFORMATION";
 
 	public static void main(String[] args) {
@@ -73,73 +73,73 @@ public class PetViewDao implements PetViewDao_interface {
 //		}
 	}
 
-	@Override
-	public List<PetViewVO> getSome() {
-		// TODO Auto-generated method stub
-
-		List<PetViewVO> some = new ArrayList<PetViewVO>();
-
-		PetViewVO petViewVO = null;
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			ps = con.prepareStatement(GET_SOME_INFO);
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				petViewVO = new PetViewVO();
-				petViewVO.setSpeciesName(rs.getString("speciesName"));
-				petViewVO.setBreedName(rs.getString("breedName"));
-				petViewVO.setPetTitle(rs.getString("petTitle"));
-				petViewVO.setPetPosition(rs.getString("petPosition"));
-				petViewVO.setSituation(rs.getString("Situation"));
-				petViewVO.setPetAge(rs.getString("petSex"));
-				petViewVO.setPetName(rs.getString("petName"));
-
-				some.add(petViewVO);
-
-			}
-
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (ps != null) {
-					try {
-						ps.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		return some;
-
-	}
+//	@Override
+//	public List<PetViewVO> getSome() {
+//		// TODO Auto-generated method stub
+//
+//		List<PetViewVO> some = new ArrayList<PetViewVO>();
+//
+//		PetViewVO petViewVO = null;
+//
+//		Connection con = null;
+//		PreparedStatement ps = null;
+//		ResultSet rs = null;
+//
+//		try {
+//			Class.forName(DRIVER);
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+//			ps = con.prepareStatement(GET_SOME_INFO);
+//			rs = ps.executeQuery();
+//
+//			while (rs.next()) {
+//				petViewVO = new PetViewVO();
+//				petViewVO.setSpeciesName(rs.getString("speciesName"));
+//				petViewVO.setBreedName(rs.getString("breedName"));
+//				petViewVO.setPetTitle(rs.getString("petTitle"));
+//				petViewVO.setPetPosition(rs.getString("petPosition"));
+//				petViewVO.setSituation(rs.getString("Situation"));
+//				petViewVO.setPetAge(rs.getString("petSex"));
+//				petViewVO.setPetName(rs.getString("petName"));
+//
+//				some.add(petViewVO);
+//
+//			}
+//
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				if (ps != null) {
+//					try {
+//						ps.close();
+//					} catch (SQLException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		return some;
+//
+//	}
 
 	@Override
 	public List<PetViewVO> getAll() {
@@ -286,6 +286,84 @@ public class PetViewDao implements PetViewDao_interface {
 		}
 		return list;
 	}
+
+	@Override
+	public PetViewVO findByPetNo(Integer petNo) {
+		// TODO Auto-generated method stub
+		 PetViewVO petViewVO = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			ps = con.prepareStatement(GET_ONE_INFO);
+			ps.setInt(1, petNo); // 就是第一個問號，pk的編號
+
+			// 然後把執行的結果放入ResultSet內
+			rs = ps.executeQuery();
+			// 把rs裡面的東西一個一個撈出來，再秀出
+			while (rs.next()) {
+				// 實體初始化
+				
+				petViewVO = new PetViewVO();
+				petViewVO.setSpeciesName(rs.getString("speciesName"));
+				petViewVO.setBreedName(rs.getString("breedName"));
+				petViewVO.setPetNo(rs.getInt("petNo"));
+				petViewVO.setPetName(rs.getString("petName"));
+				petViewVO.setPetAge(rs.getString("petAge"));
+				petViewVO.setPetSize(rs.getString("petSize"));
+				petViewVO.setPetColor(rs.getString("petColor"));
+				petViewVO.setPetPosition(rs.getString("petPosition"));
+				petViewVO.setPetIc(rs.getString("petIc"));
+				petViewVO.setTNR(rs.getString("TNR"));
+				petViewVO.setSituation(rs.getString("Situation"));
+				petViewVO.setPetDate(rs.getDate("petDate"));
+				petViewVO.setPetFilm(rs.getBytes("petFilm"));
+				petViewVO.setPetTitle(rs.getString("petTitle"));
+				petViewVO.setPetSex(rs.getString("petSex"));
+
+
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			if (ps != null) {
+				try {
+					ps.cancel();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return petViewVO; // 別忘了回傳VO實體物件(KEY物件名稱)
+	}
+
 	
 
 }

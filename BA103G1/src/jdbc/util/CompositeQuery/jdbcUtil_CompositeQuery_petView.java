@@ -14,7 +14,9 @@ public class jdbcUtil_CompositeQuery_petView {
 			aCondition = columnName + "=" + value;   //放Integer
 		else if ("petPosition".equals(columnName) || "petAge".equals(columnName) || "petSex".equals(columnName))
 			aCondition = columnName + " like '%" + value + "%'";   //放文字查詢
-//	
+		 else if ("textSearch".equals(columnName)){
+			 aCondition = "(situation like '%"+value+ "%' or petTitle like '%"+value+"%')";   //加括號可以讓他先跑(like的內容)
+		 }
 
 		return aCondition + " ";
 	}
@@ -49,7 +51,7 @@ public class jdbcUtil_CompositeQuery_petView {
 		map.put("petPosition", new String[] { "桃園市" });
 		map.put("petAge", new String[] { "幼" });
 		map.put("petSex", new String[] { "公" });
-		
+		map.put("textSearch", new String[] {"11"});
 
 		String finalSQL = "select * from PETALLINFORMATION "
 				          + jdbcUtil_CompositeQuery_petView.get_WhereCondition(map)

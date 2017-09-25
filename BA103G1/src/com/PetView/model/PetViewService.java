@@ -3,6 +3,8 @@ package com.PetView.model;
 import java.util.List;
 import java.util.Map;
 
+import com.petInformation.model.PetInformationVO;
+
 
 
 
@@ -15,10 +17,6 @@ public class PetViewService {
 //		dao = new PetInformationDaoJDBC();
 	}
 	
-	public List<PetViewVO> getSome() {
-		return dao.getSome();
-
-	}
 	
 	public List<PetViewVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
@@ -27,5 +25,7 @@ public class PetViewService {
 	public List<PetViewVO> getAll(){
 		return dao.getAll();
 	}
-
+	public PetViewVO getOnePet(Integer petNo) {
+		return dao.findByPetNo(petNo);
+	}
 }
