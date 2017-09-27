@@ -1,6 +1,10 @@
 package com.petInformation.model;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PetInformationService {
@@ -44,16 +48,13 @@ public class PetInformationService {
 		return petInfoVO;
 	}
 
-	public PetInformationVO updatePetInfo(Integer petNo, Integer memNo, Integer breedNo, String status, String petName,
-			String petAge, String petSize, String petColor, String petPosition, String petIc, String TNR,
-			String situation, Date petDate, Integer memNo2, byte[] petFilm, String petTitle, Double petLongitude,
-			Double petLatitude ,String petSex) {
+	public PetInformationVO updatePetInfo(Integer breedNo, String petName, String petAge, String petSize, String petColor, String petPosition, String petIc, String TNR,
+			String situation, Date petDate, byte[] petFilm, String petTitle, Double petLongitude, Double petLatitude ,String petSex) {
 
 		PetInformationVO petInfo = new PetInformationVO();
-		petInfo.setPetNo(petNo);
-		petInfo.setMemNo(memNo2);
+		
 		petInfo.setBreedNo(breedNo);
-		petInfo.setStatus(status);
+	
 		petInfo.setPetName(petName);
 		petInfo.setPetAge(petAge);
 		petInfo.setPetSize(petSize);
@@ -63,7 +64,7 @@ public class PetInformationService {
 		petInfo.setTNR(TNR);
 		petInfo.setSituation(situation);
 		petInfo.setPetDate(petDate);
-		petInfo.setMemNo2(memNo2);
+	
 		petInfo.setPetFilm(petFilm);
 		petInfo.setPetTitle(petTitle);
 		petInfo.setPetLongitude(petLongitude);
@@ -88,4 +89,8 @@ public class PetInformationService {
 		return dao.getAll();
 
 	}
+	public List<PetInformationVO> getSupplyPet(Integer memNo){
+		return dao.getSupplyPet(memNo);
+	}
+
 }

@@ -244,7 +244,6 @@
 							<div class="col-sm-12">
 								<label for="petPosition">動物性別</label> <select name="petSex">
 									<option value="">請選擇</option>
-									<option value="公">公</option>
 									<option value="母">母</option>
 								</select>
 							</div>

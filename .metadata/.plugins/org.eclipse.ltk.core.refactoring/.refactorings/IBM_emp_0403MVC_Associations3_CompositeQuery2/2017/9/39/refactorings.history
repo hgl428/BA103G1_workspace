@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;EmpServlet.java&apos; to &apos;BA103G1/src/com.adopt.controller&apos;&#x0D;&#x0A;- Original project: &apos;IBM_emp_0403MVC_Associations3_CompositeQuery2&apos;&#x0D;&#x0A;- Destination element: &apos;BA103G1/src/com.adopt.controller&apos;&#x0D;&#x0A;- Original element: &apos;com.emp.controller.EmpServlet.java&apos;" description="Copy compilation unit" destination="=BA103G1/src&lt;com.adopt.controller" element1="/src&lt;com.emp.controller{EmpServlet.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1506442682905" units="1" version="1.0"/>
+</session>

@@ -1,6 +1,7 @@
 package com.petInformation.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -26,11 +27,12 @@ public class PetInformationDao implements PetInformationDao_interface {
 	}
 
 	private static final String INSERT_SQL = "INSERT INTO petInformation (petNo,memNo,breedNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petFilm,petTitle,petLongitude,petLatitude,petSex) VALUES (petInformation_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; // 使用者能輸入的地方，第一次要進資料庫
-	private static final String UPDATE_SQL = "Update petInformation set breedNo = ?, status = ?, petName = ?, petAge = ?, petSize = ?, petColor = ?, petPosition = ?,"
-			+ "petIc = ?, TNR = ?, situation = ?, petFilm = ?, petTitle = ?, petSex = ? where petNo = ?";
+	private static final String UPDATE_SQL = "Update petInformation set breedNo = ?, petName = ?, petAge = ?, petSize = ?, petColor = ?, petPosition = ?, petIc = ?, TNR = ?,"
+			+ " situation = ?, petDate = ?, petFilm = ?, petTitle = ?, petLongitude = ?, petLatitude = ?, petSex = ? where petNo = ?";
 	private static final String DELETE_SQL = "delete from PetInformation where petNo = ?";
 	private static final String GET_ONE_SQL = "select memNo,breedNo,status,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,pexSex from Petinformation where petNo = ?";
 	private static final String GETALL_SQL = "SELECT * FROM PETINFORMATION ORDER BY PETNO DESC";
+	private static final String GET_SUPPLY_PET = "select * from petInformation where memNo =? order by status ";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -38,27 +40,27 @@ public class PetInformationDao implements PetInformationDao_interface {
 		PetInformationDao dao = new PetInformationDao();
 
 		// 新增
-		PetInformationVO PVO1 = new PetInformationVO();
-
-		PVO1.setMemNo(2222);
-		PVO1.setBreedNo(10);
-
-		PVO1.setPetName("lucky");
-		PVO1.setPetAge("幼");
-		PVO1.setPetSize("中");
-		PVO1.setPetColor("黑");
-		PVO1.setPetPosition("桃園市中壢區中山路300號");
-		PVO1.setPetIc("有");
-		PVO1.setTNR("無");
-		PVO1.setSituation("快樂的不得了");
-
-		PVO1.setPetFilm(null);
-		PVO1.setPetTitle("史上無敵可愛");
-		PVO1.setPetLongitude(123.0111100);
-		PVO1.setPetLatitude(111.0000000);
-		PVO1.setPetSex("母");
-
-		dao.insert(PVO1);
+		// PetInformationVO PVO1 = new PetInformationVO();
+		//
+		// PVO1.setMemNo(2222);
+		// PVO1.setBreedNo(10);
+		//
+		// PVO1.setPetName("lucky");
+		// PVO1.setPetAge("幼");
+		// PVO1.setPetSize("中");
+		// PVO1.setPetColor("黑");
+		// PVO1.setPetPosition("桃園市中壢區中山路300號");
+		// PVO1.setPetIc("有");
+		// PVO1.setTNR("無");
+		// PVO1.setSituation("快樂的不得了");
+		//
+		// PVO1.setPetFilm(null);
+		// PVO1.setPetTitle("史上無敵可愛");
+		// PVO1.setPetLongitude(123.0111100);
+		// PVO1.setPetLatitude(111.0000000);
+		// PVO1.setPetSex("母");
+		//
+		// dao.insert(PVO1);
 
 		// 修改
 		// PetInformationVO PVO2 = new PetInformationVO();
@@ -76,7 +78,7 @@ public class PetInformationDao implements PetInformationDao_interface {
 		// PVO2.setPetFilm(null);
 		// PVO2.setPetTitle("超級黏人的狗狗");
 		// PVO2.setPetNo(10);
-		//
+
 		// dao.update(PVO2);
 		//
 		// // 刪除
@@ -139,7 +141,7 @@ public class PetInformationDao implements PetInformationDao_interface {
 
 		try {
 			con = ds.getConnection();
-			ps = con.prepareStatement(INSERT_SQL, cols);  //自增主鍵值欄位名稱
+			ps = con.prepareStatement(INSERT_SQL, cols); // 自增主鍵值欄位名稱
 
 			ps.setInt(1, informationVO.getMemNo()); // 先寫假的 會員fk
 			ps.setInt(2, informationVO.getBreedNo());
@@ -160,7 +162,7 @@ public class PetInformationDao implements PetInformationDao_interface {
 			ps.setString(15, informationVO.getPetSex());
 
 			ps.executeUpdate();
-//			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+			// System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 			// getGeneratedKeys();取得主鍵值
 			ResultSet rs = ps.getGeneratedKeys(); // 找到主鍵值
 			// ResultSetMetaData rsmd = rs.getMetaData(); //
@@ -175,10 +177,10 @@ public class PetInformationDao implements PetInformationDao_interface {
 			// }while(rs.next());
 			// }
 			// rs.close();
-//			System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+			// System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 			rs.next(); // 為什麼要跑迴圈，就是如果新增很多筆的時候，就需要去找到，但現在只有一筆，所以一定就只會有那筆
 			petNo = rs.getInt(1);
-//			System.out.println("自增主鍵值=" + petNo + "剛新增成功的動物編號");
+			// System.out.println("自增主鍵值=" + petNo + "剛新增成功的動物編號");
 			rs.close();
 
 		} catch (SQLException e) {
@@ -204,7 +206,8 @@ public class PetInformationDao implements PetInformationDao_interface {
 				e.printStackTrace();
 			}
 		}
-//		System.out.println("ccccccccccccccccccccccccccccccccccccccccccccccc=" + petNo);
+		// System.out.println("ccccccccccccccccccccccccccccccccccccccccccccccc="
+		// + petNo);
 		return petNo;
 	}
 
@@ -220,19 +223,23 @@ public class PetInformationDao implements PetInformationDao_interface {
 			ps = con.prepareStatement(UPDATE_SQL);
 
 			ps.setInt(1, informationVO.getBreedNo());
-			ps.setString(2, informationVO.getStatus());
-			ps.setString(3, informationVO.getPetName());
-			ps.setString(4, informationVO.getPetAge());
-			ps.setString(5, informationVO.getPetSize());
-			ps.setString(6, informationVO.getPetColor());
-			ps.setString(7, informationVO.getPetPosition());
-			ps.setString(8, informationVO.getPetIc());
-			ps.setString(9, informationVO.getTNR());
-			ps.setString(10, informationVO.getSituation());
+
+			ps.setString(2, informationVO.getPetName());
+			ps.setString(3, informationVO.getPetAge());
+			ps.setString(4, informationVO.getPetSize());
+			ps.setString(5, informationVO.getPetColor());
+			ps.setString(6, informationVO.getPetPosition());
+			ps.setString(7, informationVO.getPetIc());
+			ps.setString(8, informationVO.getTNR());
+			ps.setString(9, informationVO.getSituation());
+			ps.setDate(10, informationVO.getPetDate());
+
 			ps.setBytes(11, informationVO.getPetFilm());
 			ps.setString(12, informationVO.getPetTitle());
-			ps.setString(13, informationVO.getPetSex());
-			ps.setInt(14, informationVO.getPetNo());
+			ps.setDouble(13, informationVO.getPetLongitude());
+			ps.setDouble(14, informationVO.getPetLatitude());
+			ps.setString(15, informationVO.getPetSex());
+			ps.setInt(16, informationVO.getPetNo());
 
 			ps.executeUpdate();
 
@@ -441,6 +448,66 @@ public class PetInformationDao implements PetInformationDao_interface {
 		}
 
 		return list;
+	}
+
+	@Override
+	public List<PetInformationVO> getSupplyPet(Integer memNo) {
+		List<PetInformationVO> list = new ArrayList<PetInformationVO>();
+		// 回傳回來某會員曾送養過動物的list
+		PetInformationVO petInfoVO = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			ps = con.prepareStatement(GET_SUPPLY_PET);
+			ps.setInt(1, memNo);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				petInfoVO = new PetInformationVO();
+				petInfoVO.setPetNo(rs.getInt("petNo"));
+				petInfoVO.setStatus(rs.getString("status"));
+				petInfoVO.setPetName(rs.getString("petName"));
+				petInfoVO.setPetDate(rs.getDate("petDate"));
+				petInfoVO.setPetTitle(rs.getString("petTitle"));
+				list.add(petInfoVO);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+
 	}
 
 }

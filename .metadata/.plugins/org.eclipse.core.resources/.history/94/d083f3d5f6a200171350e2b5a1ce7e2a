@@ -1,0 +1,55 @@
+// 	在css設定隱藏內容，點擊項目後，出現更多內容
+
+$('.pet-edit').click(function() {
+
+	$('.pet-content').toggle();
+
+});
+$('.pet-cancel').click(function() {
+
+	$('.pet-content').toggle();
+
+});
+
+$('.pet-title').click(function() {
+
+	$('.pet-adopt').hide();
+
+});
+// 所有的input設定為唯讀狀態
+$("input").prop('disabled', true);
+$("select").prop('disabled', true);
+$("textarea").prop('disabled', true);
+
+// 點擊修改按鈕後，移除input唯讀狀態，並讓儲存、取消按鈕出現。
+$('.pet-edit').click(function() {
+	$("input").prop('disabled', false);
+	$("select").prop('disabled', false);
+	$("textarea").prop('disabled', false);
+	$('.pet-edit').css('display', 'none');
+	$('.pet-save').css('display', 'block');
+	$('.pet-cancel').css('display', 'block');
+});
+
+// 點擊取消，回到唯讀狀態(disabled)
+$('.pet-cancel').click(function() {
+	$('.pet-edit').css('display', 'block');
+	$('.pet-save').css('display', 'none');
+	$('.pet-cancel').css('display', 'none');
+	$("input").prop('disabled', true);
+	$("select").prop('disabled', true);
+	$("textarea").prop('disabled', true);
+});
+
+// 點擊儲存，更新資料
+$('.pet-save').click(function() {
+	alert('你確定要修改嗎?')
+
+	// 儲存完畢後，view就會恢復為預設狀態
+	$('.pet-edit').css('display', 'block');
+	$('.pet-save').css('display', 'none');
+	$('.pet-cancel').css('display', 'none');
+	$("input").prop('disabled', true);
+	$("select").prop('disabled', true);
+	$("textarea").prop('disabled', true);
+});

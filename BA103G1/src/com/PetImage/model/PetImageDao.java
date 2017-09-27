@@ -275,7 +275,7 @@ public class PetImageDao implements PetImageDao_interface {
 
 	@Override
 	public List<PetImageVO> getPetPic(Integer petNo) {
-		// TODO Auto-generated method stub
+		// 	一對多，一隻動物會有多圖
 		List<PetImageVO> list = new ArrayList<PetImageVO>();
 
 		PetImageVO imageVO = null;

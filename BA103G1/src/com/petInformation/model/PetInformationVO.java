@@ -66,7 +66,7 @@ public class PetInformationVO implements java.io.Serializable {
 	}
 
 	public void setStatus(String status) {
-		status = status;
+		this.status = status;
 	}
 
 	public String getPetName() {

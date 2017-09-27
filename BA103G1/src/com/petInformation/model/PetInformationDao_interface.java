@@ -14,6 +14,6 @@ public interface PetInformationDao_interface {
 	
 	public List<PetInformationVO> getAll();
 	
-	
+	public List<PetInformationVO> getSupplyPet (Integer memNo);  //一對多：某會員送養了幾隻動物, 回傳幾隻動物
 	
 }

@@ -35,7 +35,7 @@
 <!-- <script src="js/main.js"></script> -->
 <script type="text/javascript"
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVTvj_0kUlIT4NDFTo4AV0ZJbliitGrPQ"></script>
-<script src="js/Address.js"></script>
+<script src="<%=request.getContextPath()%>/JSP/IpetB/js/Address.js"></script>
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/JSP/IpetB/css/main.css">
@@ -48,7 +48,7 @@
 </head>
 
 <body>
-	${PetBreedVO }
+	
 	<!--第一區：nav區-->
 	<div class="b_nav">
 		<div class="container">
@@ -147,9 +147,10 @@
 					ACTION="<%=request.getContextPath()%>/JSP/IpetB/addAdopt.do"
 					name="add">
 					<div class="form-group petName">
-						<span class="text-danger">*</span><label for="petName">動物姓名</label> <input type="text"
-							class="form-control" name="petName" placeholder="請填入動物的名字或暱稱"
-							value="${param.petName}" /> <font color="red">${errorMsgs.petName}</font>
+						<span class="text-danger">*</span><label for="petName">動物姓名</label>
+						<input type="text" class="form-control" name="petName"
+							placeholder="請填入動物的名字或暱稱" value="${param.petName}" /> <font
+							color="red">${errorMsgs.petName}</font>
 					</div>
 
 					<div class="form-group petSex">
@@ -167,28 +168,16 @@
 								<option value="${speciesVO.speciesNo}"
 									${(PetSpeciesVO.speciesNo==speciesVO.speciesNo)? 'selected':'' }>${speciesVO.speciesName}</option>
 							</c:forEach>
-						</select> 
-						<font color="red">${errorMsgs.speciesNo}</font>
-					</div>
-
-					<div class="form-group petColor">
-						<span class="text-danger">*</span><label for="petColor">毛色</label>
-						<select class="form-control" name="petColor">
-							<option value="${param.petColor}">請選擇</option>
-							<option value="黑">黑</option>
-							<option value="白">白</option>
-							<option value="黑白">黑白</option>
-							<option value="黃">黃</option>
-							<option value="黃白">黃白</option>
-							<option value="虎斑">虎斑</option>
-							<option value="米克斯">米克斯</option>
-							<option value="棕">棕</option>
-							<option value="咖啡">咖啡</option>
-							<option value="其他">其他</option>
-						</select>
-							<font color="red">${errorMsgs.petColor}</font>
+						</select> <font color="red">${errorMsgs.speciesNo}</font>
 					</div>
 					
+					<div class="form-group petColor">
+						<span class="text-danger">*</span><label for="petColor">動物毛色</label>
+						<input type="text" class="form-control" name="petColor"
+							placeholder="請填入動物的毛色" value="${param.petColor}" /> <font
+							color="red">${errorMsgs.petColor}</font>
+					</div>
+
 					<jsp:useBean id="breedSvc" scope="page"
 						class="com.PetBreed.model.PetBreedService" />
 					<div class="form-group breed">
@@ -200,8 +189,7 @@
 								<option value="${breedVO.breedNo}"
 									${(PetBreedVO.breedNo==breedVO.breedNo)? 'selected':'' }>${breedVO.breedName}</option>
 							</c:forEach>
-						</select>
-						<font color="red">${errorMsgs.petBreed}</font>
+						</select> <font color="red">${errorMsgs.petBreed}</font>
 					</div>
 
 					<div class="form-group petAge">
@@ -217,8 +205,7 @@
 							<option value="大型">大型</option>
 							<option value="中型">中型</option>
 							<option value="小型">小型</option>
-						</select>
-						<font color="red">${errorMsgs.petSize}</font>
+						</select> <font color="red">${errorMsgs.petSize}</font>
 					</div>
 
 					<div class="form-group petPosition">
@@ -247,8 +234,7 @@
 							<option value="澎湖縣">澎湖縣</option>
 							<option value="金門縣">金門縣</option>
 							<option value="連江縣">連江縣</option>
-						</select>
-						<font color="red">${errorMsgs.position}</font>
+						</select> <font color="red">${errorMsgs.position}</font>
 					</div>
 					<div class="form-group">
 						<span class="text-danger">*</span><label for="keyAddr">送養地址</label>
@@ -272,14 +258,16 @@
 
 					<div class="form-group petTitle">
 						<span class="text-danger">*</span><label for="petTitle">送養標題</label>
-						<input type="text" class="form-control" name="petTitle" value="${param.petTitle}"
-							placeholder="請填入十個字內的送養標題"> <font color="red">${errorMsgs.petTitle}</font>
+						<input type="text" class="form-control" name="petTitle"
+							value="${param.petTitle}" placeholder="請填入十個字內的送養標題"> <font
+							color="red">${errorMsgs.petTitle}</font>
 					</div>
 
 					<div class="form-group petContent">
 						<span class="text-danger">*</span><label for="petContent">動物現況</label>
-						<textarea class="form-control" name="situation" rows="5"
-							value="<%=(petInfoVO == null) ? "" : petInfoVO.getSituation()%>"></textarea>
+						<textarea class="form-control" id="situation" name="situation"
+							rows="5">${PetInformationVO.situation}</textarea>
+						
 						<font color="red">${errorMsgs.situation}</font>
 					</div>
 
@@ -300,8 +288,7 @@
 							class="form-text text-muted"></small> <span class="text-danger">*</span><label
 							for="image">照片名稱</label> <input type="text" class="form-control"
 							id="picName1" name="picName1" placeholder="請填入照片名稱"
-							value="${param.picName}">
-						<font color="red">${errorMsgs.picName1}</font>
+							value="${param.picName}"> <font color="red">${errorMsgs.picName1}</font>
 
 					</div>
 

@@ -1,0 +1,40 @@
+
+		* {
+			/*outline: 1px solid red;*/
+		}
+		table {
+			margin: 20px;
+		}
+		.table {
+			width: 90%;
+		}
+
+		.table tbody tr {
+			cursor: pointer;
+		}
+		.table tbody td label {
+			padding: 5px;
+		}
+		.table tbody td input{
+			width: 70%;
+		}
+		.table tbody td input[disabled] {
+			background-color: rgba(221, 221, 221, 0.33);
+		    color: #aaa;
+			cursor: not-allowed;
+		}
+		.pet-content {
+			display: none;
+		}
+		.pet-content>td {
+			border-bottom: 1px solid #ccc;
+		}
+		.pet-content .btn-area {
+			margin-bottom: 20px;
+		}
+		.pet-save, .pet-cancel {
+			display: none;
+		}
+		.pet-cancel {
+			margin-right: 10px;
+		}

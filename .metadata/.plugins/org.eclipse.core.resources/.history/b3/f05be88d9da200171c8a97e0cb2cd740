@@ -1,0 +1,16 @@
+package com.adoptionList.model;
+
+import java.util.List;
+
+public interface adoptionListDao_interface {
+
+	public void insert(AdoptionListVO adoptionListVO);  //提出送養申請
+	
+	public void delete(Integer memNo, Integer petNo);   //取消申請
+	
+	public List<Integer> getSupplyPet (Integer supplyMen);  //送養了幾隻動物, 回傳幾隻動物
+	
+	public List<Integer> getApplyPet(Integer memNo);   //領養人對幾隻動物提出申請，回傳動物
+	
+	public  void deleteAllApplyPet(Integer memNo);   //刪除所有領養人
+}

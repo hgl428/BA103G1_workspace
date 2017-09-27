@@ -5,3 +5,14 @@
 9月 21, 2017 11:20:38.25 NEW SESSION
 9月 21, 2017 11:20:38.25 [3120:1148:0921/112038.250:ERROR:browser_gpu_channel_host_factory.cc(103)] Failed to launch GPU process.
 9月 21, 2017 22:12:52.97 [9028:5972:0921/221252.969:ERROR:backend_impl.cc(1021)] Critical error found -8
+
+9月 26, 2017 14:52:57.19 NEW SESSION
+9月 26, 2017 14:52:57.19 [1012:2436:0926/145257.195:ERROR:backend_impl.cc(1021)] Critical error found -8
+9月 26, 2017 14:53:12.38 [1012:2436:0926/145312.380:ERROR:backend_impl.cc(1021)] Critical error found -8
+9月 26, 2017 14:53:12.38 [1012:4532:0926/145312.380:ERROR:shader_disk_cache.cc(237)] Failed to create shader cache entry: -2
+9月 26, 2017 14:53:12.38 [1012:4532:0926/145312.380:ERROR:shader_disk_cache.cc(237)] Failed to create shader cache entry: -2
+9月 26, 2017 14:53:12.38 [1012:4532:0926/145312.380:ERROR:shader_disk_cache.cc(237)] Failed to create shader cache entry: -2
+9月 26, 2017 14:53:12.39 [1012:2436:0926/145312.398:ERROR:entry_impl.cc(962)] Failed to save user data
+9月 26, 2017 14:53:13.91 [1012:2436:0926/145313.917:ERROR:backend_impl.cc(1021)] Critical error found -8
+9月 26, 2017 14:53:13.95 [1012:2436:0926/145313.917:ERROR:entry_impl.cc(962)] Failed to save user data
+9月 26, 2017 14:53:15.03 [1012:4532:0926/145315.038:ERROR:shader_disk_cache.cc(237)] Failed to create shader cache entry: -2
