@@ -33,7 +33,7 @@ public class PetViewDao implements PetViewDao_interface {
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String USER = "BA103";
 	private static final String PASSWORD = "123456";
-	private static final String GET_ONE_INFO = "select speciesName,breedName,petNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,petSex from PETALLINFORMATION where petNo=?";
+	private static final String GET_ONE_INFO = "select speciesNo,speciesName,breedNo,breedName,petNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,petSex from PETALLINFORMATION where petNo=?";
 	private static final String GET_ALL = "select speciesName,breedName,petNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,petSex from PETALLINFORMATION";
 
 	public static void main(String[] args) {
@@ -308,7 +308,9 @@ public class PetViewDao implements PetViewDao_interface {
 				// 實體初始化
 				
 				petViewVO = new PetViewVO();
+				petViewVO.setSpeciesNo(rs.getInt("speciesNo"));
 				petViewVO.setSpeciesName(rs.getString("speciesName"));
+				petViewVO.setBreedNo(rs.getInt("breedNo"));
 				petViewVO.setBreedName(rs.getString("breedName"));
 				petViewVO.setPetNo(rs.getInt("petNo"));
 				petViewVO.setPetName(rs.getString("petName"));

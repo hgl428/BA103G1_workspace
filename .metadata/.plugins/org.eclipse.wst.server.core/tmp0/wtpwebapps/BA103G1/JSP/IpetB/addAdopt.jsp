@@ -201,7 +201,7 @@
 					<div class="form-group petSize">
 						<span class="text-danger">*</span><label for="petSize">體型</label>
 						<select class="form-control" name="petSize">
-							<option value="">請選擇</option>
+							<option value="${param.petSize}">請選擇</option>
 							<option value="大型">大型</option>
 							<option value="中型">中型</option>
 							<option value="小型">小型</option>
@@ -211,7 +211,7 @@
 					<div class="form-group petPosition">
 						<span class="text-danger">*</span><label for="petPosition">送養縣市</label>
 						<select name="position" id="position">
-							<option value="">選擇縣市</option>
+							<option value="${param.position}">選擇縣市</option>
 							<option value="台北市">台北市</option>
 							<option value="新北市">新北市</option>
 							<option value="桃園市">桃園市</option>

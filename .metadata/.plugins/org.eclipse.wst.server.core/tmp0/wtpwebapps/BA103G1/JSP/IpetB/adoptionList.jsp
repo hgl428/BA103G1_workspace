@@ -67,7 +67,26 @@
 					<td>${infoList.petTitle}</td>
 					<td>${infoList.petDate}</td>
 					<td>${infoList.status}</td>
-					<td><button class="pet-edit pull-right btn btn-primary">修改</button></td> 
+					<td><button class="pet-edit pull-right btn btn-primary ">修改</button></td> 
+					<td>
+					<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/JSP/IpetB/addAdopt.do">
+						<button class="pet-edit pull-right btn btn-primary"> 修改</button>
+						<input type="hidden" name="petNo" value="${infoList.petNo}"> 
+<%-- 						<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> --%>
+						<!--送出本網頁的路徑給Controller-->
+						<input type="hidden" name="action" value="get_one_pet">
+					</FORM>
+				</td>
+				<td>
+					<FORM METHOD="post"
+						ACTION="<%=request.getContextPath()%>/JSP/IpetB/addAdopt.do">
+						<button class="pet-edit pull-right btn btn-primary">刪除</button>
+						<input type="hidden" name="empno" value="${empVO.empno}"> 
+<%-- 						<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> --%>
+						<!--送出本網頁的路徑給Controller-->
+						<input type="hidden" name="action" value="delete">
+					</FORM>
+				</td>
 				</tr>
 			</tbody>
 		</c:forEach>
@@ -125,9 +144,9 @@
 							</div>
 
 							<div class="form-group petSex">
-								*<label class="radio-inline">動物性別</label> <input type="radio"
-									name="petSex" value="公" checked> 公 <input type="radio"
-									name="petSex" value="母"> 母
+								*<label class="radio-inline">動物性別</label> 
+								<input type="radio"	name="petSex" value="公" checked> 公 
+								<input type="radio"	name="petSex" value="母"> 母
 							</div>
 							<jsp:useBean id="speciesSvc" scope="page"
 								class="com.PetSpecies.model.PetSpeciesService" />
@@ -141,7 +160,7 @@
 									</c:forEach>
 								</select> <font color="red">${errorMsgs.speciesNo}</font>
 							</div>
-
+							
 							<div class="form-group petColor">
 								<span class="text-danger">*</span><label for="petColor">動物毛色</label>
 								<input type="text" class="form-control" name="petColor"

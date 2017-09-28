@@ -1,16 +1,16 @@
-/** ¦Û¦æ¨ú±oDataSourceªº servlet
+/** ï¿½Û¦ï¿½ï¿½ï¿½oDataSourceï¿½ï¿½ servlet
  
- 1.»Ý°t¦X web.xml ¦p¤U:
+ 1.ï¿½Ý°tï¿½X web.xml ï¿½pï¿½U:
     <resource-ref>
       <description>DB Connection</description>
       <res-ref-name>jdbc/TestDB</res-ref-name>
       <res-type>javax.sql.DataSource</res-type>
       <res-auth>Container</res-auth>
     </resource-ref>
- 2.»Ý°t¦X server.xml
-    -°Ñ¦Ò: http://localhost:8080/index.jsp ­º­¶
-             ¤§ Tomcat Documentation ¤§ JNDI DataSource HOW-TO ªº»¡©ú
-    -ª`·N: ÀH servlet container ª©¥»¼gªk·|¤£¦P              
+ 2.ï¿½Ý°tï¿½X server.xml
+    -ï¿½Ñ¦ï¿½: http://localhost:8080/index.jsp ï¿½ï¿½ï¿½ï¿½
+             ï¿½ï¿½ Tomcat Documentation ï¿½ï¿½ JNDI DataSource HOW-TO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    -ï¿½`ï¿½N: ï¿½H servlet container ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½kï¿½|ï¿½ï¿½ï¿½P              
  */
 import java.io.*;
 import javax.servlet.*;
@@ -30,7 +30,7 @@ public class Test_DataSource extends HttpServlet {
 
 		try {
 			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB2");
 			if (ds != null) {
 				Connection conn = ds.getConnection();
 

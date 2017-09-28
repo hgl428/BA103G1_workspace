@@ -31,8 +31,8 @@ public class PassImageServlet extends HttpServlet {
 		res.setContentType("image/gif"); // 傳進來是圖片型態
 		ServletOutputStream out = res.getOutputStream(); // 用二位元輸出到瀏覽器
 //		String petNo = req.getParameter("petNo");
-		Integer petNo = Integer.parseInt(req.getParameter("petNo"));
-		int index = Integer.parseInt(req.getParameter("index"));
+		Integer petNo = Integer.parseInt(req.getParameter("petNo"));  //抓到照片的name=?  doget的方法
+		int index = Integer.parseInt(req.getParameter("index"));   //再給他本編號裡面的第幾張圖index=?   doget
 //		System.out.println("幾號動物的圖"+petNo);
 //		System.out.println("有多少圖"+index);
 		

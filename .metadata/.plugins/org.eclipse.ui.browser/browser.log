@@ -16,3 +16,6 @@
 9月 26, 2017 14:53:13.91 [1012:2436:0926/145313.917:ERROR:backend_impl.cc(1021)] Critical error found -8
 9月 26, 2017 14:53:13.95 [1012:2436:0926/145313.917:ERROR:entry_impl.cc(962)] Failed to save user data
 9月 26, 2017 14:53:15.03 [1012:4532:0926/145315.038:ERROR:shader_disk_cache.cc(237)] Failed to create shader cache entry: -2
+
+9月 28, 2017 15:57:21.94 NEW SESSION
+9月 28, 2017 15:57:21.94 [960:3712:0928/155721.944:ERROR:socket_stream.cc(210)] Closing stream with result -100
