@@ -136,7 +136,7 @@ public class PetInformationDao implements PetInformationDao_interface {
 		Integer petNo = null;
 		Connection con = null;
 		PreparedStatement ps = null;
-		String[] cols = { "petNo" };
+		String[] cols = { "petNo"};
 		// int[] cols = {1} ;
 
 		try {

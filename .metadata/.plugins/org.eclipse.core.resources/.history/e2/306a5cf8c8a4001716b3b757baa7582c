@@ -1,0 +1,5 @@
+package com.adoptionList.model;
+
+public class adoptionDao {
+
+}

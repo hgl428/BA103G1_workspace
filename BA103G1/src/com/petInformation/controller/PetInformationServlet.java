@@ -235,6 +235,12 @@ public class PetInformationServlet extends HttpServlet {
 			}
 		}
 
+		
+		
+		
+		
+		
+		
 		if ("update".equals(action)) { // 如果是進入新增程式區塊
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 
@@ -442,12 +448,16 @@ public class PetInformationServlet extends HttpServlet {
 			PetViewService petSvc = new PetViewService();
 			PetViewVO petInfo = petSvc.getOnePet(petNo);
 			
+//			PetImageService petImgSvc = new PetImageService();
+//			PetImageVO petPic = petImgSvc.addPetImage(petNo);
 			//第三層  拿到vo，準備轉交
 			req.setAttribute("PetViewVO", petInfo);
 			String url = "/JSP/IpetB/updateAdopt.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交addAdopt.jsp
 			successView.forward(req, res);
 		}
+		
+		
 	}
 
 }

@@ -207,9 +207,9 @@ System.out.println(petViewVO.getPetPosition().substring(0,3));
 						<span class="text-danger">*</span><label for="petSize">體型</label>
 						<select class="form-control" name="petSize">
 							<option value="${PetViewVO.petSize}">請選擇</option>
-							<option value="大型" <%=petViewVO.getPetSize().equals("大型") ? "select" :"" %>>大型</option>
-							<option value="中型" <%=petViewVO.getPetSize().equals("中型") ? "select" :"" %>>中型</option>
-							<option value="小型" <%=petViewVO.getPetSize().equals("小型") ? "select" :"" %>>小型</option>
+							<option value="大型" <%=petViewVO.getPetSize().equals("大型") ? "selected" :"" %>>大型</option>
+							<option value="中型" <%=petViewVO.getPetSize().equals("中型") ? "selected" :"" %>>中型</option>
+							<option value="小型" <%=petViewVO.getPetSize().equals("小型") ? "selected" :"" %>>小型</option>
 						</select> <font color="red">${errorMsgs.petSize}</font>
 					</div>
 					
@@ -219,28 +219,28 @@ System.out.println(petViewVO.getPetPosition().substring(0,3));
 						<select name="position" id="position">
 						
 							<option value="">選擇縣市</option>     
-							<option value="台北市" <%=petViewVO.getPetPosition().substring(0,3).equals("台北市") ? "select" :"" %>>台北市</option>
-							<option value="新北市" <%=petViewVO.getPetPosition().substring(0,3).equals("新北市") ? "select" :"" %>>新北市</option>
-							<option value="桃園市" <%=petViewVO.getPetPosition().substring(0,3).equals("桃園市") ? "select" :"" %>>桃園市</option>
-							<option value="新竹市" <%=petViewVO.getPetPosition().substring(0,3).equals("新竹市") ? "select" :"" %>>新竹市</option>
-							<option value="新竹縣" <%=petViewVO.getPetPosition().substring(0,3).equals("新竹縣") ? "select" :"" %>>新竹縣</option>
-							<option value="宜蘭縣" <%=petViewVO.getPetPosition().substring(0,3).equals("宜蘭縣") ? "select" :"" %>>宜蘭縣</option>
-							<option value="基隆市" <%=petViewVO.getPetPosition().substring(0,3).equals("基隆市") ? "select" :"" %>>基隆市</option>
-							<option value="台中市" <%=petViewVO.getPetPosition().substring(0,3).equals("台中市") ? "select" :"" %>>台中市</option>
-							<option value="彰化縣" <%=petViewVO.getPetPosition().substring(0,3).equals("彰化市") ? "select" :"" %>>彰化縣</option>
-							<option value="雲林縣" <%=petViewVO.getPetPosition().substring(0,3).equals("雲林縣") ? "select" :"" %>>雲林縣</option>
-							<option value="苗栗縣" <%=petViewVO.getPetPosition().substring(0,3).equals("苗集縣") ? "select" :"" %>>苗栗縣</option>
-							<option value="南投縣" <%=petViewVO.getPetPosition().substring(0,3).equals("南投縣") ? "select" :"" %>>南投縣</option>
-							<option value="高雄市" <%=petViewVO.getPetPosition().substring(0,3).equals("高雄市") ? "select" :"" %>>高雄市</option>
-							<option value="台南市" <%=petViewVO.getPetPosition().substring(0,3).equals("台南市") ? "select" :"" %>>台南市</option>
-							<option value="嘉義市" <%=petViewVO.getPetPosition().substring(0,3).equals("嘉義市") ? "select" :"" %>>嘉義市</option>
-							<option value="嘉義縣" <%=petViewVO.getPetPosition().substring(0,3).equals("嘉義縣") ? "select" :"" %>>嘉義縣</option>
-							<option value="屏東縣" <%=petViewVO.getPetPosition().substring(0,3).equals("屏東縣") ? "select" :"" %>>屏東縣</option>
-							<option value="台東縣" <%=petViewVO.getPetPosition().substring(0,3).equals("台東縣") ? "select" :"" %>>台東縣</option>
-							<option value="花蓮縣" <%=petViewVO.getPetPosition().substring(0,3).equals("花蓮縣") ? "select" :"" %>>花蓮縣</option>
-							<option value="澎湖縣" <%=petViewVO.getPetPosition().substring(0,3).equals("澎湖縣") ? "select" :"" %>>澎湖縣</option>
-							<option value="金門縣" <%=petViewVO.getPetPosition().substring(0,3).equals("金門縣") ? "select" :"" %>>金門縣</option>
-							<option value="連江縣" <%=petViewVO.getPetPosition().substring(0,3).equals("連江縣") ? "select" :"" %>>連江縣</option>
+							<option value="台北市" <%=petViewVO.getPetPosition().substring(0,3).equals("台北市") ? "selected" :"" %>>台北市</option>
+							<option value="新北市" <%=petViewVO.getPetPosition().substring(0,3).equals("新北市") ? "selected" :"" %>>新北市</option>
+							<option value="桃園市" <%=petViewVO.getPetPosition().substring(0,3).equals("桃園市") ? "selected" :"" %>>桃園市</option>
+							<option value="新竹市" <%=petViewVO.getPetPosition().substring(0,3).equals("新竹市") ? "selected" :"" %>>新竹市</option>
+							<option value="新竹縣" <%=petViewVO.getPetPosition().substring(0,3).equals("新竹縣") ? "selected" :"" %>>新竹縣</option>
+							<option value="宜蘭縣" <%=petViewVO.getPetPosition().substring(0,3).equals("宜蘭縣") ? "selected" :"" %>>宜蘭縣</option>
+							<option value="基隆市" <%=petViewVO.getPetPosition().substring(0,3).equals("基隆市") ? "selected" :"" %>>基隆市</option>
+							<option value="台中市" <%=petViewVO.getPetPosition().substring(0,3).equals("台中市") ? "selected" :"" %>>台中市</option>
+							<option value="彰化縣" <%=petViewVO.getPetPosition().substring(0,3).equals("彰化縣") ? "selected" :"" %>>彰化縣</option>
+							<option value="雲林縣" <%=petViewVO.getPetPosition().substring(0,3).equals("雲林縣") ? "selected" :"" %>>雲林縣</option>
+							<option value="苗栗縣" <%=petViewVO.getPetPosition().substring(0,3).equals("苗集縣") ? "selected" :"" %>>苗栗縣</option>
+							<option value="南投縣" <%=petViewVO.getPetPosition().substring(0,3).equals("南投縣") ? "selected" :"" %>>南投縣</option>
+							<option value="高雄市" <%=petViewVO.getPetPosition().substring(0,3).equals("高雄市") ? "selected" :"" %>>高雄市</option>
+							<option value="台南市" <%=petViewVO.getPetPosition().substring(0,3).equals("台南市") ? "selected" :"" %>>台南市</option>
+							<option value="嘉義市" <%=petViewVO.getPetPosition().substring(0,3).equals("嘉義市") ? "selected" :"" %>>嘉義市</option>
+							<option value="嘉義縣" <%=petViewVO.getPetPosition().substring(0,3).equals("嘉義縣") ? "selected" :"" %>>嘉義縣</option>
+							<option value="屏東縣" <%=petViewVO.getPetPosition().substring(0,3).equals("屏東縣") ? "selected" :"" %>>屏東縣</option>
+							<option value="台東縣" <%=petViewVO.getPetPosition().substring(0,3).equals("台東縣") ? "selected" :"" %>>台東縣</option>
+							<option value="花蓮縣" <%=petViewVO.getPetPosition().substring(0,3).equals("花蓮縣") ? "selected" :"" %>>花蓮縣</option>
+							<option value="澎湖縣" <%=petViewVO.getPetPosition().substring(0,3).equals("澎湖縣") ? "selected" :"" %>>澎湖縣</option>
+							<option value="金門縣" <%=petViewVO.getPetPosition().substring(0,3).equals("金門縣") ? "selected" :"" %>>金門縣</option>
+							<option value="連江縣" <%=petViewVO.getPetPosition().substring(0,3).equals("連江縣") ? "selected" :"" %>>連江縣</option>
 						</select> <font color="red">${errorMsgs.position}</font>
 					</div>
 					
@@ -281,12 +281,12 @@ System.out.println(petViewVO.getPetPosition().substring(0,3));
 
 					<div class="form-group petTitle">
 						<label for="petTitle">經度</label> <input type="text" name="long"
-							id="long">
+							id="long" >
 					</div>
 
 					<div class="form-group petTitle">
 						<label for="petTitle">緯度</label> <input type="text" name="lat"
-							id="lat">
+							id="lat" >
 					</div>
 
 					<div class="form-group col-sm-6">

@@ -25,22 +25,23 @@ public class PetInformationDaoJDBC implements PetInformationDao_interface {
 	private static final String GET_ONE_SQL = "select memNo,breedNo,status,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,pexSex from Petinformation where petNo=?";
 	private static final String GETALL_SQL = "select * from petInformation";
 	private static final String GET_SUPPLY_PET = "select * from petInformation where memNo =?";
+//	private static final String COMFIRM_SQL = "select "
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		PetInformationDaoJDBC dao = new PetInformationDaoJDBC();
 
-		List<PetInformationVO> list =dao.getSupplyPet(111111);
-		//要顯示出來的內容，一定要set，不然秀不出來
-		for(PetInformationVO pet : list){
+		List<PetInformationVO> list = dao.getSupplyPet(111111);
+		// 要顯示出來的內容，一定要set，不然秀不出來
+		for (PetInformationVO pet : list) {
 			System.out.println(pet.getPetNo());
 			System.out.println(pet.getPetName());
 			System.out.println(pet.getStatus());
 			System.out.println(pet.getPetDate());
 			System.out.println(pet.getPetTitle());
 		}
-	
+
 		// 新增
 		// PetInformationVO PVO1 = new PetInformationVO();
 		//
@@ -68,28 +69,28 @@ public class PetInformationDaoJDBC implements PetInformationDao_interface {
 		// 修改
 
 		//
-//		PetInformationVO PVO2 = new PetInformationVO();
-//
-//		PVO2.setBreedNo(11);
-//
-//		PVO2.setPetName("哈寶寶");
-//		PVO2.setPetAge("幼年");
-//		PVO2.setPetSize("小型");
-//		PVO2.setPetColor("白");
-//		PVO2.setPetPosition("台中市太平區中山路222號");
-//		PVO2.setPetIc("無");
-//		PVO2.setTNR("有");
-//		PVO2.setSituation("現在是個超級健康寶寶，而且超可愛");
-//		PVO2.setPetDate(new Date(new java.util.Date().getTime()));
-//
-//		PVO2.setPetFilm(null);
-//		PVO2.setPetTitle("超級黏人的狗狗");
-//		PVO2.setPetLongitude(121.335654);
-//		PVO2.setPetLatitude(25.153224);
-//		PVO2.setPetSex("公");
-//		PVO2.setPetNo(110);
-//
-//		dao.update(PVO2);
+		// PetInformationVO PVO2 = new PetInformationVO();
+		//
+		// PVO2.setBreedNo(11);
+		//
+		// PVO2.setPetName("哈寶寶");
+		// PVO2.setPetAge("幼年");
+		// PVO2.setPetSize("小型");
+		// PVO2.setPetColor("白");
+		// PVO2.setPetPosition("台中市太平區中山路222號");
+		// PVO2.setPetIc("無");
+		// PVO2.setTNR("有");
+		// PVO2.setSituation("現在是個超級健康寶寶，而且超可愛");
+		// PVO2.setPetDate(new Date(new java.util.Date().getTime()));
+		//
+		// PVO2.setPetFilm(null);
+		// PVO2.setPetTitle("超級黏人的狗狗");
+		// PVO2.setPetLongitude(121.335654);
+		// PVO2.setPetLatitude(25.153224);
+		// PVO2.setPetSex("公");
+		// PVO2.setPetNo(110);
+		//
+		// dao.update(PVO2);
 
 		//
 		// // 刪除
@@ -528,6 +529,49 @@ public class PetInformationDaoJDBC implements PetInformationDao_interface {
 			}
 		}
 		return list;
+
+	}
+
+	@Override
+	public void comfirm(Integer memNo) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+//			ps = con.prepareStatement(COMFIRM_SQL);
+			
+			
+			
+			
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 
 	}
 

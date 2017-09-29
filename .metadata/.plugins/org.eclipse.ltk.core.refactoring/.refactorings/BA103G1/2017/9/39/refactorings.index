@@ -9,3 +9,9 @@
 1506416898500	Rename type 'adoptionListVO'
 1506444859293	Rename resource 'NewFile.jsp'
 1506582790427	Copy file
+1506652737132	Delete element
+1506654441708	Delete element
+1506659735790	Rename type 'adoptionListJDBC'
+1506659742792	Rename type 'adoptionListDao_interface'
+1506659758548	Rename type 'adoptionDao'
+1506659813290	Rename type 'AdoptionDao'
