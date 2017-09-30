@@ -14,7 +14,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_petView;
 
 public class PetViewDao implements PetViewDao_interface {
@@ -33,8 +32,8 @@ public class PetViewDao implements PetViewDao_interface {
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String USER = "BA103";
 	private static final String PASSWORD = "123456";
-	private static final String GET_ONE_INFO = "select speciesNo,speciesName,breedNo,breedName,petNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,petSex from PETALLINFORMATION where petNo=?";
-	private static final String GET_ALL = "select speciesName,breedName,petNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,petSex from PETALLINFORMATION";
+	private static final String GET_ONE_INFO = "select speciesNo,speciesName,breedNo,breedName,petNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,petSex,petLongitude,petLatitude from PETALLINFORMATION where petNo=?";
+	private static final String GET_ALL = "select speciesName,breedName,petNo,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,petSex,petLongitude,petLatitude from PETALLINFORMATION";
 
 	public static void main(String[] args) {
 		PetViewDao dao = new PetViewDao();
@@ -60,86 +59,86 @@ public class PetViewDao implements PetViewDao_interface {
 		// System.out.println(list.getPetSex() + ",");
 		// }
 
-//		List<PetViewVO> PVO3 = dao.getSome();
-//		for (PetViewVO list : PVO3) {
-//
-//			System.out.println(list.getSpeciesName() + ",");
-//			System.out.println(list.getBreedName() + ",");
-//			System.out.println(list.getPetName() + ",");
-//			System.out.println(list.getPetPosition() + ",");
-//			System.out.println(list.getSituation() + ",");
-//			System.out.println(list.getPetTitle() + ",");
-//			System.out.println(list.getPetSex() + ",");
-//		}
+		// List<PetViewVO> PVO3 = dao.getSome();
+		// for (PetViewVO list : PVO3) {
+		//
+		// System.out.println(list.getSpeciesName() + ",");
+		// System.out.println(list.getBreedName() + ",");
+		// System.out.println(list.getPetName() + ",");
+		// System.out.println(list.getPetPosition() + ",");
+		// System.out.println(list.getSituation() + ",");
+		// System.out.println(list.getPetTitle() + ",");
+		// System.out.println(list.getPetSex() + ",");
+		// }
 	}
 
-//	@Override
-//	public List<PetViewVO> getSome() {
-//		// TODO Auto-generated method stub
-//
-//		List<PetViewVO> some = new ArrayList<PetViewVO>();
-//
-//		PetViewVO petViewVO = null;
-//
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//
-//		try {
-//			Class.forName(DRIVER);
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
-//			ps = con.prepareStatement(GET_SOME_INFO);
-//			rs = ps.executeQuery();
-//
-//			while (rs.next()) {
-//				petViewVO = new PetViewVO();
-//				petViewVO.setSpeciesName(rs.getString("speciesName"));
-//				petViewVO.setBreedName(rs.getString("breedName"));
-//				petViewVO.setPetTitle(rs.getString("petTitle"));
-//				petViewVO.setPetPosition(rs.getString("petPosition"));
-//				petViewVO.setSituation(rs.getString("Situation"));
-//				petViewVO.setPetAge(rs.getString("petSex"));
-//				petViewVO.setPetName(rs.getString("petName"));
-//
-//				some.add(petViewVO);
-//
-//			}
-//
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} finally {
-//			if (rs != null) {
-//				try {
-//					rs.close();
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				if (ps != null) {
-//					try {
-//						ps.close();
-//					} catch (SQLException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-//			if (con != null) {
-//				try {
-//					con.close();
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-//		return some;
-//
-//	}
+	// @Override
+	// public List<PetViewVO> getSome() {
+	// // TODO Auto-generated method stub
+	//
+	// List<PetViewVO> some = new ArrayList<PetViewVO>();
+	//
+	// PetViewVO petViewVO = null;
+	//
+	// Connection con = null;
+	// PreparedStatement ps = null;
+	// ResultSet rs = null;
+	//
+	// try {
+	// Class.forName(DRIVER);
+	// con = DriverManager.getConnection(URL, USER, PASSWORD);
+	// ps = con.prepareStatement(GET_SOME_INFO);
+	// rs = ps.executeQuery();
+	//
+	// while (rs.next()) {
+	// petViewVO = new PetViewVO();
+	// petViewVO.setSpeciesName(rs.getString("speciesName"));
+	// petViewVO.setBreedName(rs.getString("breedName"));
+	// petViewVO.setPetTitle(rs.getString("petTitle"));
+	// petViewVO.setPetPosition(rs.getString("petPosition"));
+	// petViewVO.setSituation(rs.getString("Situation"));
+	// petViewVO.setPetAge(rs.getString("petSex"));
+	// petViewVO.setPetName(rs.getString("petName"));
+	//
+	// some.add(petViewVO);
+	//
+	// }
+	//
+	// } catch (ClassNotFoundException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// } finally {
+	// if (rs != null) {
+	// try {
+	// rs.close();
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// if (ps != null) {
+	// try {
+	// ps.close();
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
+	// }
+	// if (con != null) {
+	// try {
+	// con.close();
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
+	// }
+	// return some;
+	//
+	// }
 
 	@Override
 	public List<PetViewVO> getAll() {
@@ -154,8 +153,8 @@ public class PetViewDao implements PetViewDao_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+		
+			con = ds.getConnection();
 			ps = con.prepareStatement(GET_ALL);
 			rs = ps.executeQuery();
 
@@ -177,14 +176,14 @@ public class PetViewDao implements PetViewDao_interface {
 				petViewVO.setPetFilm(rs.getBytes("petFilm"));
 				petViewVO.setPetTitle(rs.getString("petTitle"));
 				petViewVO.setPetSex(rs.getString("petSex"));
+				petViewVO.setPetLongitude(rs.getDouble("petLongitude"));
+				petViewVO.setPetLatitude(rs.getDouble("PetLatitude"));
 
 				list.add(petViewVO);
 
 			}
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -221,21 +220,20 @@ public class PetViewDao implements PetViewDao_interface {
 	public List<PetViewVO> getAll(Map<String, String[]> map) {
 		List<PetViewVO> list = new ArrayList<PetViewVO>();
 		PetViewVO petViewVO = null;
-	
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-	
+
 		try {
-			
+
 			con = ds.getConnection();
 			String finalSQL = "select * from PETALLINFORMATION "
-		          + jdbcUtil_CompositeQuery_petView.get_WhereCondition(map)
-		          + "order by petDate";
+					+ jdbcUtil_CompositeQuery_petView.get_WhereCondition(map) + "order by petDate";
 			ps = con.prepareStatement(finalSQL);
-			System.out.println("finalSQL(by DAO) = "+finalSQL);
+			System.out.println("finalSQL(by DAO) = " + finalSQL);
 			rs = ps.executeQuery();
-	
+
 			while (rs.next()) {
 				petViewVO = new PetViewVO();
 				petViewVO.setSpeciesName(rs.getString("speciesName"));
@@ -252,15 +250,17 @@ public class PetViewDao implements PetViewDao_interface {
 				petViewVO.setPetDate(rs.getDate("petDate"));
 				petViewVO.setPetFilm(rs.getBytes("petFilm"));
 				petViewVO.setPetTitle(rs.getString("petTitle"));
-				petViewVO.setPetSex(rs.getString("petSex")); // Store the row in the List
-				
+				petViewVO.setPetSex(rs.getString("petSex")); // Store the row in
+																// the List
+				petViewVO.setPetLongitude(rs.getDouble("petLongitude"));
+				petViewVO.setPetLatitude(rs.getDouble("PetLatitude"));
+
 				list.add(petViewVO);
 			}
-	
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -290,14 +290,14 @@ public class PetViewDao implements PetViewDao_interface {
 	@Override
 	public PetViewVO findByPetNo(Integer petNo) {
 		// TODO Auto-generated method stub
-		 PetViewVO petViewVO = null;
+		PetViewVO petViewVO = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
-			Class.forName(DRIVER);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			
+			con =ds.getConnection();
 			ps = con.prepareStatement(GET_ONE_INFO);
 			ps.setInt(1, petNo); // 就是第一個問號，pk的編號
 
@@ -306,7 +306,7 @@ public class PetViewDao implements PetViewDao_interface {
 			// 把rs裡面的東西一個一個撈出來，再秀出
 			while (rs.next()) {
 				// 實體初始化
-				
+
 				petViewVO = new PetViewVO();
 				petViewVO.setSpeciesNo(rs.getInt("speciesNo"));
 				petViewVO.setSpeciesName(rs.getString("speciesName"));
@@ -325,13 +325,12 @@ public class PetViewDao implements PetViewDao_interface {
 				petViewVO.setPetFilm(rs.getBytes("petFilm"));
 				petViewVO.setPetTitle(rs.getString("petTitle"));
 				petViewVO.setPetSex(rs.getString("petSex"));
-
+				petViewVO.setPetLongitude(rs.getDouble("petLongitude"));
+				petViewVO.setPetLatitude(rs.getDouble("PetLatitude"));
 
 			}
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -365,7 +364,5 @@ public class PetViewDao implements PetViewDao_interface {
 
 		return petViewVO; // 別忘了回傳VO實體物件(KEY物件名稱)
 	}
-
-	
 
 }

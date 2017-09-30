@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.PetBreed.model.PetBreedVO;
 import com.PetImage.model.PetImageService;
 import com.PetImage.model.PetImageVO;
 
 import com.PetSpecies.model.PetSpeciesVO;
+import com.PetBreed.model.PetBreedVO;
+import com.petInformation.model.*;
 import com.PetView.model.PetViewService;
 import com.PetView.model.PetViewVO;
-import com.petInformation.model.*;
 
 @MultipartConfig(fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 5 * 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024
 		* 1024) // 要東西要上傳必填
@@ -156,9 +156,11 @@ public class PetInformationServlet extends HttpServlet {
 
 				//
 
-				InputStream petImage = req.getPart("petImage1").getInputStream(); // 把上傳的照片name=petImage1抓進來
+				InputStream petImage = req.getPart("petImage1").getInputStream(); 
+				// 把上傳的照片name=petImage1抓進來，一定要getPart,getParameter抓不到東西，回傳inputstream
 
-				byte[] petImage1 = null; // 宣告放petImage1的地方
+				byte[] petImage1 = null; // 宣告放petImage1的地方  是byte[]陣列
+				//所以接下來的做的事就是，把inputStream轉成byte[]
 
 				// if
 				// (req.getPart("petImage1").getContentType().contains("image/gif")){
@@ -169,14 +171,14 @@ public class PetInformationServlet extends HttpServlet {
 				// if (petImage1 == null) {
 				// errorMsgs.put("petImage1", "請上傳動物圖片"); // 如果沒選就給提示訊息
 				// } else {
-				ByteArrayOutputStream buffer = new ByteArrayOutputStream(); // 緩衝區
+				ByteArrayOutputStream buffer = new ByteArrayOutputStream(); // 緩衝區,把petimage轉出來的地方
 
 				int len; // 水桶
 				byte[] buf = new byte[4 * 1024]; // 4K buffer 水瓢
 				while ((len = petImage.read(buf)) != -1) { // 一個水桶裝滿就倒 把照片讀進來
 					buffer.write(buf, 0, len); // 最後從第一桶開始倒，倒到剩下，要小心最後一桶是倒全部還是倒剩下的。
 				}
-				petImage1 = buffer.toByteArray(); // 把圖一轉成byte陣列
+				petImage1 = buffer.toByteArray(); // 把圖一轉成byte陣列 ，這才裡是把inputstream轉成byte[]的地方
 				System.out.print(petImage1.length);
 				req.setAttribute("petImageVO", petImage);
 				// }
@@ -212,7 +214,7 @@ public class PetInformationServlet extends HttpServlet {
 						petPosition, petIc, TNR, situation, petFilm, petTitle, Longitude, Latitude, petSex);
 
 				PetImageService petImgSvc = new PetImageService();
-				PetImageVO petPic = petImgSvc.addPetImage(petInfo.getPetNo(), petImage1, picName1);
+				PetImageVO petPic = petImgSvc.addPetImage(petInfo.getPetNo(), petImage1, picName1);  //這裡就是把圖片和其他放入資料庫
 				// 因為petInfo已經會回傳一個petNo了，所以可以直接用
 				// System.out.println("5"+petImage1);
 
@@ -253,7 +255,7 @@ public class PetInformationServlet extends HttpServlet {
 				/***************************
 				 * 把要新增的內容都列出來
 				 **********************/
-
+				Integer petNo = Integer.parseInt(req.getParameter("petNo"));
 				String petName = req.getParameter("petName");
 				if (req.getParameter("petName").trim().length() == 0) {
 					errorMsgs.put("petName", "請填寫動物名稱");
@@ -268,6 +270,7 @@ public class PetInformationServlet extends HttpServlet {
 					errorMsgs.put("speciesNo", "請選擇一個種類");
 				} else {
 					speciesNo = Integer.parseInt(req.getParameter("speciesNo"));
+					
 					speciesVO.setSpeciesNo(speciesNo);
 				}
 				String petColor = req.getParameter("petColor");
@@ -321,6 +324,7 @@ public class PetInformationServlet extends HttpServlet {
 				String petIc = req.getParameter("petIc").trim();
 
 				String TNR = req.getParameter("TNR").trim();
+				System.out.println(TNR);
 
 				String petTitle = null;
 				if (req.getParameter("petTitle").trim().length() == 0) {
@@ -338,33 +342,32 @@ public class PetInformationServlet extends HttpServlet {
 
 				byte[] petFilm = null;
 
-				PetInformationVO petInfoVO = new PetInformationVO();
-
-				petInfoVO.setPetName(petName);
-
-				petInfoVO.setPetSex(petSex);
-				petInfoVO.setPetColor(petColor);
-				petInfoVO.setPetAge(petAge);
-				petInfoVO.setPetSize(petSize);
-				petInfoVO.setPetPosition(petPosition);
-				petInfoVO.setPetIc(petIc);
-				petInfoVO.setTNR(TNR);
-				petInfoVO.setPetTitle(petTitle);
-				petInfoVO.setSituation(situation);
-				petInfoVO.setPetLongitude(Longitude);
-				petInfoVO.setPetLatitude(Latitude);
-				petInfoVO.setPetFilm(petFilm);
-
-				//
-
-				PetBreedVO breedVO = new PetBreedVO();
-				breedVO.setBreedNo(breedNo);
+				PetViewVO petviewVO = new PetViewVO();
+				petviewVO.setPetNo(petNo);
+				petviewVO.setPetName(petName);
+				petviewVO.setSpeciesNo(speciesNo);
+				petviewVO.setBreedNo(breedNo);
+				petviewVO.setPetSex(petSex);
+				petviewVO.setPetColor(petColor);
+				petviewVO.setPetAge(petAge);
+				petviewVO.setPetSize(petSize);
+				petviewVO.setPetPosition(petPosition);
+				petviewVO.setPetIc(petIc);
+				petviewVO.setTNR(TNR);
+				petviewVO.setPetTitle(petTitle);
+				petviewVO.setSituation(situation);
+				petviewVO.setPetLongitude(Longitude);
+				petviewVO.setPetLatitude(Latitude);
+				petviewVO.setPetFilm(petFilm);
 
 				//
 
-				InputStream petImage = req.getPart("petImage1").getInputStream(); // 把上傳的照片name=petImage1抓進來
 
-				byte[] petImage1 = null; // 宣告放petImage1的地方
+				//
+
+//				InputStream petImage = req.getPart("petImage1").getInputStream(); // 把上傳的照片name=petImage1抓進來
+//
+//				byte[] petImage1 = null; // 宣告放petImage1的地方
 
 				// if
 				// (req.getPart("petImage1").getContentType().contains("image/gif")){
@@ -375,58 +378,82 @@ public class PetInformationServlet extends HttpServlet {
 				// if (petImage1 == null) {
 				// errorMsgs.put("petImage1", "請上傳動物圖片"); // 如果沒選就給提示訊息
 				// } else {
-				ByteArrayOutputStream buffer = new ByteArrayOutputStream(); // 緩衝區
+//				ByteArrayOutputStream buffer = new ByteArrayOutputStream(); // 緩衝區
+//
+//				int len; // 水桶
+//				byte[] buf = new byte[4 * 1024]; // 4K buffer 水瓢
+//				while ((len = petImage.read(buf)) != -1) { // 一個水桶裝滿就倒 把照片讀進來
+//					buffer.write(buf, 0, len); // 最後從第一桶開始倒，倒到剩下，要小心最後一桶是倒全部還是倒剩下的。
+//				}
+//				petImage1 = buffer.toByteArray(); // 把圖一轉成byte陣列
+//				System.out.print(petImage1.length);
+//				req.setAttribute("petImageVO", petImage);
+//				// }
+//
+//				String picName1 = null;
+//				if (req.getParameter("picName1").trim().length() == 0) {
+//					errorMsgs.put("picName1", "請輸入照片名稱");
+//				} else {
+//					picName1 = req.getParameter("picName1");
+//				}
+//
+//				// System.out.println(picName1);
+//
+//				PetImageVO imageVO = new PetImageVO();
+//
+//				imageVO.setpetPicture(petImage1); // 放傳進來的照片petImage1
+//				imageVO.setPicName(picName1);
 
-				int len; // 水桶
-				byte[] buf = new byte[4 * 1024]; // 4K buffer 水瓢
-				while ((len = petImage.read(buf)) != -1) { // 一個水桶裝滿就倒 把照片讀進來
-					buffer.write(buf, 0, len); // 最後從第一桶開始倒，倒到剩下，要小心最後一桶是倒全部還是倒剩下的。
-				}
-				petImage1 = buffer.toByteArray(); // 把圖一轉成byte陣列
-				System.out.print(petImage1.length);
-				req.setAttribute("petImageVO", petImage);
-				// }
+				
 
-				String picName1 = null;
-				if (req.getParameter("picName1").trim().length() == 0) {
-					errorMsgs.put("picName1", "請輸入照片名稱");
-				} else {
-					picName1 = req.getParameter("picName1");
-				}
-
-				// System.out.println(picName1);
-
-				PetImageVO imageVO = new PetImageVO();
-
-				imageVO.setpetPicture(petImage1); // 放傳進來的照片petImage1
-				imageVO.setPicName(picName1);
-
+				PetBreedVO breedVO = new PetBreedVO();
+				breedVO.setBreedNo(breedNo);
+				System.out.println("========test1======");
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("PetInformationVO", petInfoVO);
+					req.setAttribute("PetViewVO", petviewVO);
 					req.setAttribute("PetBreedVO", breedVO);
 					req.setAttribute("PetSpeciesVO", speciesVO);
-					req.setAttribute("PetImageVO", imageVO);
+//					req.setAttribute("PetImageVO", imageVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/JSP/IpetB/updateAdopt.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-
+				PetInformationVO petInfoVO = new PetInformationVO();
+				petInfoVO.setPetNo(petNo);
+				petInfoVO.setBreedNo(breedNo);
+				petInfoVO.setPetName(petName);
+				petInfoVO.setPetAge(petAge);
+				petInfoVO.setPetSize(petSize);
+				petInfoVO.setPetColor(petColor);
+				petInfoVO.setPetPosition(petPosition);
+				petInfoVO.setPetIc(petIc);
+				petInfoVO.setTNR(TNR);
+				System.out.println("servlet tnr = "+TNR);
+				petInfoVO.setSituation(situation);
+				petInfoVO.setPetDate(new java.sql.Date(new java.util.Date().getTime()));
+				petInfoVO.setPetSex(petSex);
+				petInfoVO.setPetTitle(petTitle);
+				petInfoVO.setPetLongitude(Longitude);
+				petInfoVO.setPetLatitude(Latitude);
+				petInfoVO.setPetFilm(petFilm);
+				System.out.println("========test2======");
 				/*************************** 2.開始查詢資料 *****************************************/
-
+				
 				PetInformationService petInfoSvc = new PetInformationService();
-				PetInformationVO petInfo = petInfoSvc.updatePetInfo(breedNo, petName, petAge, petSize, petColor,
+				System.out.println("========test3-1======");
+				PetInformationVO petInfo = petInfoSvc.updatePetInfo(petNo,breedNo, petName, petAge, petSize, petColor,
 						petPosition, petIc, TNR, situation, petDate, petFilm, petTitle, Longitude, Latitude, petSex);
-				PetImageService petImgSvc = new PetImageService();
-				PetImageVO petPic = petImgSvc.addPetImage(petInfo.getPetNo(), petImage1, picName1);
+//				PetImageService petImgSvc = new PetImageService();
+//				PetImageVO petPic = petImgSvc.addPetImage(petInfo.getPetNo(), petImage1, picName1);
 				// 因為petInfo已經會回傳一個petNo了，所以可以直接用
 				// System.out.println("5"+petImage1);
-
+				System.out.println("========test3======");
 				/***************************
 				 * 3.新增完成,準備轉交(Send the Success view)
 				 ***********/
 				req.setAttribute("PetInformationVO", petInfo);
 
-				req.setAttribute("PetImageVO", petPic);
+//				req.setAttribute("PetImageVO", petPic);
 				String url = "/JSP/IpetB/adoption.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交addAdopt.jsp
 				successView.forward(req, res);
@@ -440,6 +467,12 @@ public class PetInformationServlet extends HttpServlet {
 			}
 		}
 
+		
+		
+		
+		
+		
+		
 		if ("get_one_pet".equals(action)) {
 			//第一層，先拿到前一頁傳來的參數
 			Integer petNo = Integer.parseInt(req.getParameter("petNo"));

@@ -1,0 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.PetBreed.model.*"%>
+<%@ page import="com.PetSpecies.model.*"%>
+<%@ page import="com.petInformation.model.*"%>
+<%@ page import="com.PetImage.model.*"%>
+<%@ page import="com.adoptionList.model.*"%>
+<%@ page import="java.util.*"%>
+
+<%
+	
+%>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>會員頁用</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="js/main.js"></script> -->
+<script type="text/javascript"
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVTvj_0kUlIT4NDFTo4AV0ZJbliitGrPQ"></script>
+<script src="<%=request.getContextPath()%>/JSP/IpetB/js/Address.js"></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/JSP/IpetB/css/adopt.css">
+
+
+</head>
+<body>
+	<jsp:useBean id="applySvc" scope="page"
+		class="com.adoptionList.model.AdoptionService" />
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>寵物編號</th>
+				<th>動物名稱</th>
+				<th>送養標題</th>
+
+			</tr>
+		</thead>
+		<c:forEach var="adoptList" items="${applySvc.getApplyPet(2)}">
+			<!-- 		接session傳來的會員編號 -->
+			<tbody>
+				<!-- 標題區，點擊後會打開更多內容區 -->
+				<tr class="pet-title ">
+					<td>${adoptList.memNo}</td>
+					<td>${adoptList.petNo}</td>
+					<td>${adoptList.supplyMen}</td>
+
+AAAAAAAAAAAAA=${adoptList.memNo}
+BBBBBBBBBBBB=${adoptList.petNo}
+					<td>
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/AdoptionListServlet">
+							<button class="pet-edit pull-right btn btn-primary">取消認養</button>
+							<input type="hidden" name="memNo" value="${adoptList.memNo}">
+							<input type="hidden" name="petNo" value="${adoptList.petNo}">
+							<!--送出本網頁的路徑給Controller-->
+							<input type="hidden" name="action" value="delete">
+						</FORM>
+					</td>
+				</tr>
+			</tbody>
+		</c:forEach>
+	</table>
+
+
+
+
+</body>
+<script src="<%=request.getContextPath()%>/JSP/IpetB/js/adopt.js"></script>
+</html>

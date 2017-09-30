@@ -12,4 +12,5 @@ public interface AdoptionListDao_interface {
 
 	public void deleteAllApplyPet(Integer petNo); // 送養人確認誰領養後，刪除跟動物有關的所有領養人
 
+	public List<AdoptionListVO> getPetApply(Integer petNo);  //得知某動物有多少人想領養
 }

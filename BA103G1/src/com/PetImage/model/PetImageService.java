@@ -38,15 +38,15 @@ public class PetImageService {
 	public void deletePetImage(Integer picNo) {
 		dao.delete(picNo);
 	}
-
+	
 	public PetImageVO getOnePetImage(Integer picNo) {
 		return dao.findByPK(picNo);
 	}
-
+	
 	public List<PetImageVO> getAll() {
 		return dao.getAll();
 	}
-
+	//一隻動物有幾張圖
 	public List<PetImageVO> getPetPic(Integer petNo) {
 		return dao.getPetPic(petNo);
 	}

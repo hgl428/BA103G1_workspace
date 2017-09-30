@@ -1,0 +1,12 @@
+package com.adoptionList.model;
+
+public class AdoptionService {
+
+	private AdoptionListDao_interface dao;
+	
+	public AdoptionService(){
+		dao = new AdoptionListDao();
+	}
+	
+	
+}

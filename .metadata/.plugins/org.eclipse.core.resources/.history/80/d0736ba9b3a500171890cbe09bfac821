@@ -1,0 +1,25 @@
+package com.adoptionList.model;
+
+public class AdoptionService {
+
+	private AdoptionListDao_interface dao;
+	
+	public AdoptionService(){
+		dao = new AdoptionListDao();
+	}
+	
+	public  AdoptionListVO apply(Integer memNo, Integer petNo,Integer supplyMen){
+		AdoptionListVO adoptVO = new AdoptionListVO();
+		
+		adoptVO.setMemNo(memNo);
+		adoptVO.setPetNo(petNo);
+		adoptVO.setSupplyMen(supplyMen);
+	
+		dao.insert(adoptVO);
+		return adoptVO;
+	}
+	
+	public void delete(Integer memNo, Integer petNo){
+		 dao.delete(memNo, petNo);
+	}
+}

@@ -1,10 +1,11 @@
 package com.petInformation.model;
 
+
 import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class PetInformationDao implements PetInformationDao_interface {
 	private static final String UPDATE_SQL = "Update petInformation set breedNo = ?, petName = ?, petAge = ?, petSize = ?, petColor = ?, petPosition = ?, petIc = ?, TNR = ?,"
 			+ " situation = ?, petDate = ?, petFilm = ?, petTitle = ?, petLongitude = ?, petLatitude = ?, petSex = ? where petNo = ?";
 	private static final String DELETE_SQL = "delete from PetInformation where petNo = ?";
-	private static final String GET_ONE_SQL = "select memNo,breedNo,status,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,pexSex from Petinformation where petNo = ?";
+	private static final String GET_ONE_SQL = "select memNo,breedNo,status,petName,petAge,petSize,petColor,petPosition,petIc,TNR,situation,petDate,petFilm,petTitle,petSex from Petinformation where petNo = ?";
 	private static final String GETALL_SQL = "SELECT * FROM PETINFORMATION ORDER BY PETNO DESC";
 	private static final String GET_SUPPLY_PET = "select * from petInformation where memNo =? order by status ";
 
@@ -508,6 +509,12 @@ public class PetInformationDao implements PetInformationDao_interface {
 		}
 		return list;
 
+	}
+
+	@Override
+	public void comfirm(Integer memNo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

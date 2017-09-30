@@ -263,7 +263,7 @@
 							<ul class="photo-list">
 								<c:forEach var="imageVO"
 									items="${picSvc.getPetPic(petviewVO.petNo)}" varStatus="i">
-									<%-- 								items就是寫一個List集合${用圖老大的方法，拿去比對動物的編號petviewVO.petNo}拿到一動物對多的圖 --%>
+									<%-- items就是寫一個List集合${用圖老大的方法，拿去比對動物的編號petviewVO.petNo}拿到一動物對多的圖 --%>
 									<li><img
 										src="<%=request.getContextPath()%>/JSP/IpetB/PetImage.do?petNo=${petviewVO.petNo}&index=${i.count}">
 									</li>
@@ -354,7 +354,13 @@
 						<!-- 基本資料 end -->
 						<!-- 按鈕區 start -->
 						<div class="btn-area">
-							<button>加入最愛</button>
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/AdoptionListServlet">
+								<button class="pet-edit pull-right btn btn-primary">提出認養</button>
+								<input type="hidden" name="petNo" value="${petviewVO.petNo}">
+								<input type="hidden" name="memNo" value="2">
+								<input type="hidden" name="action" value="insert">
+							</FORM>
 							<button>提出認養</button>
 							<button>檢舉</button>
 						</div>

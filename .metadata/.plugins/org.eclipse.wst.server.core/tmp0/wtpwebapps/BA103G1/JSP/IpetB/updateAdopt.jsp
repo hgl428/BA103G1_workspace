@@ -13,8 +13,11 @@
 // 	PetSpeciesVO speciesVO = (PetSpeciesVO) request.getAttribute("PetSpeciesVO"); //記憶使用者輸入種類的選項
 // 	PetImageVO imageVO = (PetImageVO) request.getAttribute("PetImageVO"); //記憶使用者輸入的照片和標題
 
+
+
 PetViewVO petViewVO = (PetViewVO) request.getAttribute("PetViewVO");
-System.out.println(petViewVO.getPetPosition().substring(0,3));
+
+
 %>
 
 
@@ -168,7 +171,7 @@ System.out.println(petViewVO.getPetPosition().substring(0,3));
 					<div class="form-group species">
 						<span class="text-danger">*</span><label for="species">動物類型</label>
 						<select class="form-control" name="speciesNo">
-							<option value="">請選擇</option>
+							<option value="${param.speciesNo}">請選擇</option>
 							<c:forEach var="speciesVO" items="${speciesSvc.all}">
 								<option value="${speciesVO.speciesNo}"
 									${(speciesVO.speciesNo == PetViewVO.speciesNo)? 'selected': "" }>${speciesVO.speciesName}</option>
@@ -280,33 +283,33 @@ System.out.println(petViewVO.getPetPosition().substring(0,3));
 					</div>
 
 					<div class="form-group petTitle">
-						<label for="petTitle">經度</label> <input type="text" name="long"
-							id="long" >
+						<label for="long">經度</label> <input type="text" name="long"
+							id="long" value="${PetViewVO.petLongitude}">
 					</div>
 
 					<div class="form-group petTitle">
-						<label for="petTitle">緯度</label> <input type="text" name="lat"
-							id="lat" >
+						<label for="lat">緯度</label> <input type="text" name="lat"
+							id="lat" value="${PetViewVO.petLatitude}">
 					</div>
 
-					<div class="form-group col-sm-6">
-						<label for="petImage"> 動物照片上傳 </label> <input type="file"
-							class="form-control-file" name="petImage1" value=""
-							aria-describedby="fileHelp"> <small name="igname"
-							class="form-text text-muted"></small> <span class="text-danger">*</span><label
-							for="image">照片名稱</label> <input type="text" class="form-control"
-							id="picName1" name="picName1" placeholder="請填入照片名稱"
-							value="${param.picName}"> <font color="red">${errorMsgs.picName1}</font>
+<!-- 					<div class="form-group col-sm-6"> -->
+<!-- 						<label for="petImage"> 動物照片上傳 </label> <input type="file" -->
+<!-- 							class="form-control-file" name="petImage1" value="" -->
+<!-- 							aria-describedby="fileHelp"> <small name="igname" -->
+<!-- 							class="form-text text-muted"></small> <span class="text-danger">*</span><label -->
+<!-- 							for="image">照片名稱</label> <input type="text" class="form-control" -->
+<!-- 							id="picName1" name="picName1" placeholder="請填入照片名稱" -->
+<%-- 							value="${param.picName}"> <font color="red">${errorMsgs.picName1}</font> --%>
 
-					</div>
+<!-- 					</div> -->
 
-					<div class="form-group col-sm-6">
-						<label for="petFilm"> 動物影片上傳 <span>（限一部）</span>
-						</label> <input type="file" class="form-control-file" name="petFilm"
-							aria-describedby="fileHelp"> <small id="petFilm"
-							class="form-text text-muted"></small>
-					</div>
-
+<!-- 					<div class="form-group col-sm-6"> -->
+<!-- 						<label for="petFilm"> 動物影片上傳 <span>（限一部）</span> -->
+<!-- 						</label> <input type="file" class="form-control-file" name="petFilm" -->
+<!-- 							aria-describedby="fileHelp"> <small id="petFilm" -->
+<!-- 							class="form-text text-muted"></small> -->
+<!-- 					</div> -->
+					<input type="hidden" name="petNo" value="${PetViewVO.petNo }">
 					<input type="hidden" name="action" value="update">
 					<button type="submit" class="btn btn-primary pull-right">確認送出</button>
 

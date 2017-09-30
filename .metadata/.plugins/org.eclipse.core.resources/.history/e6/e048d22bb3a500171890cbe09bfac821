@@ -1,0 +1,22 @@
+package com.adoptionList.model;
+
+public class AdoptionService {
+
+	private AdoptionListDao_interface dao;
+	
+	public AdoptionService(){
+		dao = new AdoptionListDao();
+	}
+	
+	public  apply(Integer memNo, Integer petNo,Integer supplyMen){
+		AdoptionListVO adoptVO = new AdoptionListVO();
+		
+		adoptVO.setMemNo(memNo);
+		adoptVO.setPetNo(petNo);
+		adoptVO.setSupplyMen(supplyMen);
+	
+		dao.insert(adoptVO);
+		
+		return adoptVO;
+	}
+}

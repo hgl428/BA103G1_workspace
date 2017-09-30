@@ -1,0 +1,316 @@
+package com.adoptionList.model;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+
+public class AdoptionListDao implements AdoptionListDao_interface{
+	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver"; // oracle驅動
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+	private static final String USER = "BA103";
+	private static final String PASSWORD = "123456";
+
+	private static final String INSERT_SQL = "INSERT INTO adoptionList (memNo,petNo,supplyMen) values (?,?)"; // memNo是領養人
+																												// petNo想領養的動物
+	private static final String DELETE_SQL = "delete from adoptionList where memNo = ? and petNo = ?";	//取消領養
+	private static final String GET_APPLYPET_SQL = "select * from adoptionList where memNo = ? ";   //知道領養人提交過多少次動物認養
+	private static final String DELETE_ALLAPPLYPET_SQL = "delete from adoptionList where petNo = ? ";  //確定認養者後，刪除該動物所有認養人
+	private static final String GET_PETAPPLY_SQL = "select * from adoptionList where petNo = ? ";   //得知某動物有多少認養人
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		AdoptionListJDBC dao = new AdoptionListJDBC();
+
+		// AdoptionListVO pvo1 = new AdoptionListVO(); //新增測試
+
+		// pvo1.setMemNo(5);
+		// pvo1.setPetNo(2);
+		// pvo1.setSupplyMen(3);
+		//
+		// dao.insert(pvo1);
+
+		 dao.delete(4, 2); //刪除測試
+
+//		 List<AdoptionListVO> pvo2 = dao.getApplyPet(2); //查詢測試某會員提出幾次領養
+//		 for( AdoptionListVO pet : pvo2){
+//			System.out.println("誰想領養="+pet.getMemNo());
+//			System.out.println("我是誰"+pet.getPetNo());
+//			System.out.println("誰送養我="+pet.getSupplyMen());
+//		 }
+//		 AdoptionListVO pvo5 = (AdoptionListVO) dao.getPetApply(2); //查詢測試
+//		 System.out.println(pvo5.getMemNo());
+//		 System.out.println(pvo5.getPetNo());
+//		 System.out.println(pvo5.getSupplyMen());
+	}
+
+	@Override
+	public void insert(AdoptionListVO adoptionListVO) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			
+			con = ds.getConnection();
+			ps = con.prepareStatement(INSERT_SQL);
+
+			ps.setInt(1, adoptionListVO.getMemNo());
+			ps.setInt(2, adoptionListVO.getPetNo());
+
+		
+			ps.executeUpdate();
+
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void delete(Integer memNo, Integer petNo) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+		
+			con = ds.getConnection();
+			ps = con.prepareStatement(DELETE_SQL);
+
+			ps.setInt(1, memNo);
+			ps.setInt(2, petNo);
+
+			ps.executeUpdate();
+
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	@Override // 領養人對幾隻動物提出申請，回傳全部的動物
+	public List<AdoptionListVO> getApplyPet(Integer memNo) {
+		// TODO Auto-generated method stub
+		List<AdoptionListVO> list = new ArrayList<AdoptionListVO>();
+		AdoptionListVO adoptVO = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			ps = con.prepareStatement(GET_APPLYPET_SQL);
+			ps.setInt(1, memNo);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				adoptVO = new AdoptionListVO();
+				adoptVO.setMemNo(rs.getInt("memNo"));
+				adoptVO.setPetNo(rs.getInt("petNo"));
+				adoptVO.setSupplyMen(rs.getInt("supplyMen"));
+
+				list.add(adoptVO);
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+
+	}
+
+	@Override
+	public void deleteAllApplyPet(Integer petNo) {
+			
+			// TODO Auto-generated method stub
+			Connection con = null;
+			PreparedStatement ps = null;
+
+			try {
+				
+				con = ds.getConnection();
+				ps = con.prepareStatement(DELETE_ALLAPPLYPET_SQL);
+
+			
+				ps.setInt(1, petNo);
+
+				ps.executeUpdate();
+
+		
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+
+		}
+	
+
+	@Override
+	public List<AdoptionListVO> getPetApply(Integer petNo) {
+		List<AdoptionListVO> list = new ArrayList<AdoptionListVO>();
+		AdoptionListVO adoptVO = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			
+			con = ds.getConnection();
+			ps = con.prepareStatement(GET_PETAPPLY_SQL);
+			ps.setInt(1, petNo);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				adoptVO = new AdoptionListVO();
+				adoptVO.setMemNo(rs.getInt("memNo"));
+				adoptVO.setPetNo(rs.getInt("petNo"));
+				adoptVO.setSupplyMen(rs.getInt("supplyMen"));
+
+				list.add(adoptVO);
+			}
+
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+
+	}
+
+}

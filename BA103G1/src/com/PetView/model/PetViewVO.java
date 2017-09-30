@@ -22,6 +22,11 @@ public class PetViewVO implements java.io.Serializable{
 	private byte[] petFilm; // 動物影片
 	private String petTitle; // 送養標題
 	private String petSex; // 動物性別
+	private Double petLongitude;
+	private Double petLatitude;
+
+
+
 
 	public PetViewVO() {
 		super();
@@ -180,4 +185,19 @@ public class PetViewVO implements java.io.Serializable{
 		this.petSex = petSex;
 	}
 
+	public Double getPetLongitude() {
+		return petLongitude;
+	}
+
+	public void setPetLongitude(Double petLongitude) {
+		this.petLongitude = petLongitude;
+	}
+
+	public Double getPetLatitude() {
+		return petLatitude;
+	}
+
+	public void setPetLatitude(Double petLatitude) {
+		this.petLatitude = petLatitude;
+	}
 }
